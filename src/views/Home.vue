@@ -25,7 +25,7 @@ export default {
 			</div>
 			<div class="index-links">
 				<router-link :to="{name: 'about'}" class="white-text">About</router-link>
-				<a href="https://quantum.softberg.org" target="_blank" class="white-text">Learn more</a>
+				<a href="https://quantum.softberg.org" target="_blank" class="white-text">Learn More</a>
 			</div>
 		</div>
 	</div>

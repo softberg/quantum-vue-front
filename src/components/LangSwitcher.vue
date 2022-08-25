@@ -19,7 +19,7 @@ export default {
 	</a>
 	<ul id="dropdown2" class="dropdown-content">
 		<li v-for="lang in langs" :key="lang.id">
-			<RouterLink to="{{ lang.id }}">{{ lang.text }}</RouterLink>
+			<router-link to="{{ lang.id }}">{{ lang.text }}</router-link>
 		</li>
 	</ul>
 </template>

@@ -11,7 +11,7 @@ export default {
 	<div class="main-wrapper teal accent-4 full-height">
 		<div class="container wrapper center-align white-text">
 			<h1 class="main-title">About</h1>
-			<div class="card teal">
+			<div class="card teal accent-4">
 				<div class="card-content">
 					<h6>
 						Quantum is a free, open-source PHP web framework under MIT license, specially designed

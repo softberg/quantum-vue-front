@@ -1,17 +1,56 @@
 <script>
-
-import Navbar from "@/components/Navbar.vue";
+import axiosInstance from "@/axiosInstance";
+import NavBar from "@/components/Navbar.vue";
+import FooterBar from "@/components/Footerbar.vue";
 
 export default {
 	components: {
-		Navbar
+		NavBar,
+		FooterBar
 	},
+
+	data() {
+		return {
+			user: null,
+		}
+	},
+
+	mounted() {
+		this.checkUser();
+	},
+
+	updated() {
+		this.checkUser();
+	},
+
+	methods: {
+		checkUser() {
+			const accessToken = localStorage.getItem('accessToken');
+
+			if (accessToken && !this.user) {
+				axiosInstance.get('/api-me', {
+					headers: {
+						Authorization: 'Bearer ' + accessToken
+					}
+				}).then((response) => {
+					let result = response.data;
+					if (result.status == 'success') {
+						this.user = result.data;
+					}
+				});
+			}
+		},
+
+		signout() {
+			this.user = null;
+		}
+	}
 }
 </script>
 
 <template>
 	<header>
-		<Navbar />
+		<NavBar :user="user" @signout="signout" />
 	</header>
 	<main>
 		<router-view v-slot="{ Component, route }">
@@ -21,7 +60,9 @@ export default {
 				</div>
 			</transition>
 		</router-view>
-		<!-- <router-view /> -->
 	</main>
+	<footer class="page-footer">
+		<FooterBar />
+	</footer>
 </template>
 
