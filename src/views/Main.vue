@@ -1,7 +1,8 @@
 <script>
-import axiosInstance from "@/axiosInstance";
 import NavBar from "@/components/Navbar.vue";
 import FooterBar from "@/components/Footerbar.vue";
+import { AuthAPI } from "@/helpers/auth";
+import { store } from '@/store';
 
 export default {
 	components: {
@@ -11,7 +12,7 @@ export default {
 
 	data() {
 		return {
-			user: null,
+			store
 		}
 	},
 
@@ -24,33 +25,24 @@ export default {
 	},
 
 	methods: {
-		checkUser() {
+		async checkUser() {
 			const accessToken = localStorage.getItem('accessToken');
 
-			if (accessToken && !this.user) {
-				axiosInstance.get('/api-me', {
-					headers: {
-						Authorization: 'Bearer ' + accessToken
-					}
-				}).then((response) => {
-					let result = response.data;
-					if (result.status == 'success') {
-						this.user = result.data;
-					}
-				});
+			if (accessToken && !this.store.user) {
+				let user = await AuthAPI.getUser(accessToken);
+
+				if (user) {
+					this.store.setUser(user);
+				}
 			}
 		},
-
-		signout() {
-			this.user = null;
-		}
 	}
 }
 </script>
 
 <template>
 	<header>
-		<NavBar :user="user" @signout="signout" />
+		<NavBar />
 	</header>
 	<main>
 		<router-view v-slot="{ Component, route }">
