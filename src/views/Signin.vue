@@ -1,47 +1,50 @@
 <script>
-import axiosInstance from '@/axiosInstance';
-import PasswordField from '@/components/PasswordField.vue'
-import ErrorMessage from '@/components/messages/ErrorMessage.vue';
+import { AuthAPI } from "@/helpers/auth";
+import PasswordField from '@/components/PasswordField.vue';
+import AlertMessage from "@/components/AlertMessage.vue";
 
 export default {
 	data() {
 		return {
 			form: {
-				username: '',
+				email: '',
 				password: '',
 				remember: false
 			},
-			error: {
-				status: false,
+			alert: {
+				type: null,
 				message: ''
-			}
+			},
+			inProgress: false
 		}
 	},
 
 	methods: {
-		submit() {
-			axiosInstance.post('/api-signin', this.form).then((response) => {
-				let result = response.data;
+		async submit() {
+			this.inProgress = true;
 
-				if (result.status == 'error') {
-					this.error.status = true;
-					this.error.message = result.message;
-				} else {
-					localStorage.setItem('accessToken', result.tokens.access_token);
-					localStorage.setItem('refreshToken', result.tokens.refresh_token);
+			let response = await AuthAPI.signin(this.form);
 
-					this.error.status = false;
-					this.error.message = '';
 
-					this.$router.push({ name: 'home' });
-				}
-			});
+			if (response.status == 'success') {
+				localStorage.setItem('accessToken', response.tokens.access_token);
+				localStorage.setItem('refreshToken', response.tokens.refresh_token);
+
+				this.alert.type = null;
+				this.alert.message = '';
+
+				this.$router.push({ name: 'home' });
+			} else {
+				this.alert.type = response.status;
+				this.alert.message = response.message;
+				this.inProgress = false;
+			}
 		}
 	},
 
 	components: {
 		PasswordField,
-		ErrorMessage
+		AlertMessage
 	}
 }
 </script>
@@ -52,14 +55,17 @@ export default {
 			<div class="row">
 				<div class=" col s12 l8 offset-l2 center-align white-text">
 					<h1>Sign In</h1>
-					<ErrorMessage :message="error.message" v-if="error.message" />
+
+					<AlertMessage :message="alert.message" :type="alert.type" v-if="alert.message" />
+
 					<div class="card teal accent-4">
 						<div class="card-content">
-							<form method="post" class="signup-form" @submit.prevent="submit">
+							<form method="post" @submit.prevent="submit">
 								<div class="row">
 									<div class="input-field col s12">
-										<label for="username">Email</label>
-										<input name="username" id='username' type="text" v-model="form.username" />
+										<label for="email">Email</label>
+										<input name="email" id='email' type="text" v-model="form.email"
+											autocomplete="off" />
 									</div>
 								</div>
 								<div class="row">
@@ -94,7 +100,8 @@ export default {
 									</div>
 								</div>
 								<div class="row">
-									<button class="btn btn-large waves-effect waves-light" type="submit">Sign
+									<button class="btn btn-large waves-effect waves-light" :disabled="inProgress"
+										type="submit">Sign
 										In</button>
 								</div>
 							</form>
