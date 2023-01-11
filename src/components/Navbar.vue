@@ -1,16 +1,21 @@
 <script>
-import LangSwitcher from '@/components/LangSwitcher.vue'
+import LangSwitcher from '@/components/LangSwitcher.vue';
+import { AuthAPI } from '@/helpers/auth';
+import { store } from '@/store';
 
 export default {
 	components: {
 		LangSwitcher
 	},
 
-	props: {
-		user: {
-			type: Object,
-			default: null
+	data() {
+		return {
+			store
 		}
+	},
+
+	mounted() {
+		M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
 	},
 
 	updated() {
@@ -18,12 +23,17 @@ export default {
 	},
 
 	methods: {
-		signout() {
-			localStorage.removeItem('accessToken');
-			localStorage.removeItem('refreshToken');
+		async signout() {
+			let response = await AuthAPI.signout(localStorage.getItem('refreshToken'));
 
-			this.$emit("signout");
-			this.$router.push({ name: 'home' });
+			if (response) {
+				this.store.setUser(null);
+
+				localStorage.removeItem('accessToken');
+				localStorage.removeItem('refreshToken');
+
+				this.$router.push({ name: 'home' });
+			}
 		}
 	}
 }
@@ -42,12 +52,12 @@ export default {
 				<li>
 					<router-link :to="{ name: 'posts' }" class="white-text">Posts</router-link>
 				</li>
-				<template v-if="user">
+				<template v-if="store.user">
 					<li>
 						<a class="dropdown-trigger login-list" href="javascript:;" data-target="dropdown1">
 							<span class="hide-on-small-only show-on-medium-and-up">
-								<i class="material-icons show-on-small hide-on-med-and-up">person</i>
-								{{ user.firstname }} {{ user.lastname }}
+								<i class="material-icons left">person</i>
+								{{ store.user.firstname }} {{ store.user.lastname }}
 								<i class="material-icons right">arrow_drop_down</i>
 							</span>
 						</a>
@@ -58,7 +68,7 @@ export default {
 								</router-link>
 							</li>
 							<li>
-								<a href="javascript:;" @click="signout">
+								<a href="javascript:;" @click.prevent="signout">
 									Signout
 								</a>
 							</li>
