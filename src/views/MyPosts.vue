@@ -1,11 +1,43 @@
+<script>
+    import { store } from '../store';
+    import MyPostItem from '../components/MyPostItem.vue';
+    import { PostAPI } from '@/helpers/post';
+
+    export default {
+        components: {
+            MyPostItem
+        },
+        data() {
+            return {
+                store,
+                myPosts: [],
+            }
+        },
+        mounted() {
+            this.store.setAccessToken();
+            this.getMyPosts();
+        },
+        methods: {
+            async getMyPosts() {
+                if (this.store?.accessToken) {
+                    let response = await PostAPI.getMyPosts(this.store?.accessToken);
+
+                    if (response?.data) {
+                        this.myPosts = response?.data;
+                    }
+                }
+            }
+        }
+    }
+</script>
+
 <template>
 	<div class="posts-container">
-		<h2 class="center-align teal-text">
-			My Posts
-		</h2>
+		<h2 class="center-align teal-text">{{ $t('message.my_posts') }}</h2>
 		<div class="row post_container">
 			<!-- <?php if (count($posts)): ?> -->
 			<ul class="collection">
+                <MyPostItem v-for="post in myPosts" :key="post.id" :post="post" />
 				<!-- <?php foreach ($posts as $post): ?> -->
 				<!-- <?php echo partial('post/partials/my-post-item', ['post' => $post]) ?> -->
 				<!-- <?php endforeach; ?> -->

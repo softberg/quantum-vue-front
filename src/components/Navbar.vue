@@ -43,14 +43,14 @@ export default {
 	<nav class="teal accent-4">
 		<div class="nav-wrapper row">
 			<span class="navbar-logo" v-show="$route.name !== 'home'">
-				<router-link :to="{ name: 'home' }">
+				<router-link :to="{ name: 'home', params: { lang: this.$i18n.locale } }">
 					<img alt="Quantum PHP Framework" class="logo" src="@/assets/images/quantum-logo-white.png" />
 				</router-link>
 			</span>
 
 			<ul class="right">
 				<li>
-					<router-link :to="{ name: 'posts' }" class="white-text">Posts</router-link>
+					<router-link :to="{ name: 'posts', params: { lang: this.$i18n.locale } }" class="white-text">{{ $t('message.posts') }}</router-link>
 				</li>
 				<template v-if="store.user">
 					<li>
@@ -63,7 +63,7 @@ export default {
 						</a>
 						<ul id="dropdown1" class="dropdown-content">
 							<li>
-								<router-link :to="{ name: 'my-posts' }">
+								<router-link :to="{ name: 'my-posts', params: { lang: this.$i18n.locale } }">
 									My Posts
 								</router-link>
 							</li>
@@ -77,10 +77,10 @@ export default {
 				</template>
 				<template v-else>
 					<li v-if="$route.name != 'signup'">
-						<router-link :to="{ name: 'signup' }" class="white-text">Sign Up</router-link>
+						<router-link :to="{ name: 'signup', params: { lang: this.$i18n.locale } }" class="white-text">{{ $t('message.signup') }}</router-link>
 					</li>
 					<li v-if="$route.name != 'signin'">
-						<router-link :to="{ name: 'signin' }" class="white-text">Sign In</router-link>
+						<router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }" class="white-text">{{ $t('message.signin') }}</router-link>
 					</li>
 				</template>
 				<li class="auth-lang-switcher">

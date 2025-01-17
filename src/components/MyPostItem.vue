@@ -1,16 +1,16 @@
 <script>
-export default {
-	props: {
-		post: Object
-	}
-}
+    export default {
+        props: {
+            post: Object
+        }
+    }
 </script>
 <template>
 	<li class="collection-item avatar">
 		<!-- <?php if ($post['image']): ?> -->
-		<img src="<?php echo $post['image'] ?>" class="circle img-my-post">
+		<img v-if="post.image" :src="'/' + (post.image || 'assets/images/no-image.png')" class="circle img-my-post">
 		<!-- <?php else: ?> -->
-		<img src="<?php echo base_url() ?>/assets/images/no-image.png" class="circle img-my-post">
+		<!-- <img src="<?php echo base_url() ?>/assets/images/no-image.png" class="circle img-my-post"> -->
 		<!-- <?php endif; ?> -->
 		<span class="title post-title" title="<?php echo $post['title'] ?>">
 			<a class="teal-text post-title"
@@ -22,10 +22,14 @@ export default {
 			<!-- <?php echo date('m/d/Y H:i', strtotime($post['updated_at'])) ?? '' ?> <br> -->
 			<!-- <?php echo $post['author'] ?? '' ?> -->
 		</p>
-		<a href="<?php echo base_url() . '/' . current_lang() . '/my-posts/amend/' . $post['uuid'] ?>"
-			class="secondary-content edit-my-post" title="<?php _t('common.edit') ?>" style="right: 50px;">
-			<i class="material-icons dp48">edit</i>
-		</a>
+
+		<router-link 
+            :to="{ name: 'amend', params: { uuid: post.id, lang: this.$i18n.locale } }"
+            class="secondary-content edit-my-post" 
+            :title="$t('message.edit')" 
+            style="right: 50px;">
+            <i class="material-icons dp48">edit</i>
+        </router-link>
 		<a href="#modal-confirm" class="secondary-content modal-trigger"
 			data-url="<?php echo base_url() . '/' . current_lang() ?>/my-posts/delete/<?php echo $post['uuid'] ?>">
 			<i class="material-icons dp48">delete</i>

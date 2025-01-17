@@ -1,22 +1,22 @@
 <script>
-export default {
-	props: {
-		post: Object
-	}
-}
+    export default {
+        props: {
+            post: Object
+        }
+    }
 </script>
 <template>
 	<div class="col s12 m3 post-item">
 		<div class="card post-card hoverable">
-			<router-link :to="{ name: 'post', params: { id: post.id } }">
+			<router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale } }">
 				<div class="card-image card-image-box">
-					<img v-if="post.image" :src="post.image" class="content_img">
+					<img v-if="post.image" :src="'/' + post.image" class="content_img">
 					<img v-else src="@/assets/images/no-image.png" class="content_no_img">
 				</div>
 			</router-link>
 			<div class="card-content white teal-text text-darken-4">
 				<span class="card-title post-title" title="{{ title }}">
-					<router-link :to="{ name: 'post', params: { id: post.id } }" class="teal-text">
+					<router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale } }" class="teal-text">
 						{{ post.title }}
 					</router-link>
 				</span>

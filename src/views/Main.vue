@@ -18,6 +18,7 @@ export default {
 
 	mounted() {
 		this.checkUser();
+        this.setLang();
 	},
 
 	updated() {
@@ -36,6 +37,9 @@ export default {
 				}
 			}
 		},
+        setLang() {
+            this.$i18n.locale = this.$route.params.lang;
+        }
 	}
 }
 </script>

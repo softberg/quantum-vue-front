@@ -3,7 +3,7 @@ import axiosInstance from "@/helpers/axiosInstance";
 export const AuthAPI = {
 	async getUser(accessToken) {
 		try {
-			let response = await axiosInstance.get('/api-me', {
+			let response = await axiosInstance.get('/api/me', {
 				headers: {
 					Authorization: 'Bearer ' + accessToken
 				}
@@ -18,7 +18,7 @@ export const AuthAPI = {
 
 	async signin(form) {
 		try {
-			let response = await axiosInstance.post('/api-signin', form);
+			let response = await axiosInstance.post('/api/signin', form);
 
 			if (response.data.status !== 'success') {
 				const error = new Error(response.data.message);
@@ -35,7 +35,7 @@ export const AuthAPI = {
 
 	async signup(form) {
 		try {
-			let response = await axiosInstance.post('/api-signup', form);
+			let response = await axiosInstance.post('/signup', form);
 
 			if (response.data.status !== 'success') {
 				let message = null;
@@ -59,7 +59,7 @@ export const AuthAPI = {
 
 	async signout(refreshToken) {
 		try {
-			let response = await axiosInstance.get('/api-signout', {
+			let response = await axiosInstance.get('/api/signout', {
 				headers: {
 					'refresh_token': refreshToken
 				}

@@ -26,7 +26,7 @@ export default {
 </script>
 <template>
 	<div class="main-wrapper">
-		<h1 class="center-align teal-text">Posts</h1>
+		<h1 class="center-align teal-text">{{ $t('message.posts') }}</h1>
 		<div class="row post_container">
 			<template v-if="!posts">
 				<div class="col s12 m3 post-item" v-for="index in 8" :key="index">

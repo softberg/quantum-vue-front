@@ -17,15 +17,12 @@ export default {
 			<h1>Quantum PHP Framework</h1>
 			<div class="card teal accent-4">
 				<div class="card-content">
-					<h5>Very fast and extremely simple, next generation PHP MVC framework with modular
-						structure,
-						which
-						makes it possible to create projects of any complexity.</h5>
+					<h5>{{ $t('message.description') }}</h5>
 				</div>
 			</div>
 			<div class="index-links">
-				<router-link :to="{name: 'about'}" class="white-text">About</router-link>
-				<a href="https://quantum.softberg.org" target="_blank" class="white-text">Learn More</a>
+				<router-link :to="{ name: 'about', params: { lang: this.$i18n.locale }}" class="white-text">{{ $t('message.about') }}</router-link>
+				<a href="https://quantum.softberg.org" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
 			</div>
 		</div>
 	</div>

@@ -54,7 +54,7 @@ export default {
 		<div class="container">
 			<div class="row">
 				<div class=" col s12 l8 offset-l2 center-align white-text">
-					<h1>Sign Up</h1>
+					<h1>{{ $t('message.signup') }}</h1>
 
 					<AlertMessage :message="alert.message" :type="alert.type" v-if="alert.message" />
 
@@ -63,37 +63,37 @@ export default {
 							<form method="post" @submit.prevent="submit">
 								<div class=" row">
 									<div class="input-field col s12">
-										<label class="auth-form-label">Email</label>
+										<label class="auth-form-label">{{ $t('message.email') }}</label>
 										<input type="text" name="email" v-model="form.email" autocomplete="off" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
-										<label class="auth-form-label">Password</label>
+										<label class="auth-form-label">{{ $t('message.password') }}</label>
 										<PasswordField elemId="password" v-model="form.password" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
-										<label class="auth-form-label">First name</label>
+										<label class="auth-form-label">{{ $t('message.firstname') }}</label>
 										<input type="text" name="firstname" v-model="form.firstname" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s12">
-										<label class="auth-form-label">Lasn name</label>
+										<label class="auth-form-label">{{ $t('message.lastname') }}</label>
 										<input type="text" name="lastname" v-model="form.lastname" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="col s12 right-align">
-										<router-link :to="{ name: 'signin' }" class="white-text">Sign In
+										<router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }" class="white-text">{{ $t('message.signin') }}
 										</router-link>
 									</div>
 								</div>
 								<div class="row">
 									<button class="btn btn-large waves-effect waves-light" :disabled="inProgress"
-										type="submit">Send</button>
+										type="submit">{{ $t('message.send') }}</button>
 								</div>
 							</form>
 						</div>

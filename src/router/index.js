@@ -6,7 +6,7 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
-			path: '/',
+			path: '/:lang?',
 			name: '',
 			component: () => import('@/views/Main.vue'),
 			children: [
@@ -64,7 +64,15 @@ const router = createRouter({
 					path: 'my-posts',
 					name: 'my-posts',
 					component: () => import('@/views/MyPosts.vue'),
-					meta: { middleware: auth }
+					meta: { middleware: auth },
+                    children: [
+                        {
+                            path: 'amend/:uuid',
+                            name: 'amend',
+                            component: () => import('@/views/MyPosts.vue'),
+                            meta: { middleware: auth },
+                        }
+                    ]
 				},
 			],
 		},
