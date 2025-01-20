@@ -64,12 +64,12 @@ export default {
 						<ul id="dropdown1" class="dropdown-content">
 							<li>
 								<router-link :to="{ name: 'my-posts', params: { lang: this.$i18n.locale } }">
-									My Posts
+									{{ $t('message.my_posts') }}
 								</router-link>
 							</li>
 							<li>
 								<a href="javascript:;" @click.prevent="signout">
-									Signout
+									{{ $t('message.signout') }}
 								</a>
 							</li>
 						</ul>

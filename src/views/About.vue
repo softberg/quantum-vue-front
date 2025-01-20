@@ -4,7 +4,7 @@ import Bubbles from '@/components/Bubbles.vue';
 export default {
     data() {
         return {
-            appVersion: __APP_VERSION__,
+            appVersion: import.meta.env.VITE_APP_VERSION,
         }
     },
 	components: {

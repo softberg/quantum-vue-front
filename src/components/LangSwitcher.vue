@@ -12,11 +12,6 @@
                 ],
                 current_lang: 'en',
             }
-        },
-        updated() {
-            if (store.lang) {
-                this.$i18n.locale = store.lang;
-            }
         }
     }
 </script>

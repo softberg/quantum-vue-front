@@ -32,8 +32,6 @@ export default {
 				localStorage.setItem('accessToken', response.tokens.access_token);
 				localStorage.setItem('refreshToken', response.tokens.refresh_token);
                 
-                store.setAccessToken(response.tokens.access_token);
-
 				this.alert.type = null;
 				this.alert.message = '';
 

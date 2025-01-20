@@ -1,5 +1,4 @@
 <script>
-    import { store } from '../store';
     import MyPostItem from '../components/MyPostItem.vue';
     import { PostAPI } from '@/helpers/post';
 
@@ -9,18 +8,18 @@
         },
         data() {
             return {
-                store,
                 myPosts: [],
             }
         },
         mounted() {
-            this.store.setAccessToken();
             this.getMyPosts();
         },
         methods: {
             async getMyPosts() {
-                if (this.store?.accessToken) {
-                    let response = await PostAPI.getMyPosts(this.store?.accessToken);
+                let accessToken = localStorage.getItem('accessToken');
+
+                if (accessToken) {
+                    let response = await PostAPI.getMyPosts(accessToken);
 
                     if (response?.data) {
                         this.myPosts = response?.data;
