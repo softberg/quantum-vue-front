@@ -1,5 +1,16 @@
 <script>
-
+    export default {
+        computed: {
+            generateForgetUrl() {
+                return this.$router.resolve({
+                    name: 'forget',
+                    params: {
+                        lang: this.$i18n.locale
+                    }
+                }).href;
+            }
+        }
+    };
 
 </script>
 
@@ -15,14 +26,14 @@
 
 					<div class="card teal accent-4">
 						<div class="card-content">
-							<form method="post" action="<?php echo base_url() . '/' . current_lang() ?>/forget">
+							<form method="post" :action="generateForgetUrl">
 								<div class="input-field col s12">
 									<input type="text" name="email" id="email" />
 									<label for="email" class="white-text">Email</label>
 								</div>
 								<div class="row">
 									<div class="col s12 right-align">
-										<router-link :to="{name: 'signin'}" class="white-text">Signin</router-link>
+										<router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }" class="white-text">Signin</router-link>
 									</div>
 								</div>
 								<div>

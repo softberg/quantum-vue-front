@@ -3,7 +3,7 @@ import axiosInstance from "@/helpers/axiosInstance";
 export const PostAPI = {
 	async getPosts() {
 		try {
-			let response = await axiosInstance.get('/api-posts');
+			let response = await axiosInstance.get('/api/posts');
 
 			return response.data;
 
@@ -14,7 +14,7 @@ export const PostAPI = {
 
 	async getPost(id) {
 		try {
-			let response = await axiosInstance.get('/api-post/' + id);
+			let response = await axiosInstance.get('/api/post/' + id);
 
 			return response.data;
 
@@ -25,7 +25,7 @@ export const PostAPI = {
 
 	async getMyPosts(accessToken) {
 		try {
-			let response = await axiosInstance.get('/api-my-posts', {
+			let response = await axiosInstance.get('/api/my-posts', {
 				headers: {
 					Authorization: 'Bearer ' + accessToken
 				}

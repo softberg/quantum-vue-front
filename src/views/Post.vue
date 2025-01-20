@@ -56,7 +56,7 @@ export default {
 							{{ post.author }}
 						</div>
 					</div>
-					<img v-if="post.image" :src="post.image" class="single_page_img">
+					<img v-if="post.image" :src="'/' + post.image" class="single_page_img">
 					<p class="left-align single-blog-txt">
 						{{ post.content }}
 					</p>
