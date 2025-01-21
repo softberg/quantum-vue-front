@@ -4,14 +4,14 @@ export default {
 		message: {
 			type: String,
 			required: true,
-			isArray: false
+			length: false
 		}
 	}
 }
 </script>
 <template>
 	<div class="material-alert error">
-		<ul class="left-align" v-if="message.isArray">
+		<ul class="left-align" v-if="message.length">
 			<li v-for="line in message">
 				{{ line }}
 			</li>

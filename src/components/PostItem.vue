@@ -1,7 +1,14 @@
 <script>
+    import axiosInstance from "../helpers/axiosInstance";
+
     export default {
         props: {
             post: Object
+        },
+        data() {
+            return {
+                base_url: import.meta.env.VITE_BASE_URL
+            }
         }
     }
 </script>
@@ -10,7 +17,7 @@
 		<div class="card post-card hoverable">
 			<router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale } }">
 				<div class="card-image card-image-box">
-					<img v-if="post.image" :src="'/' + post.image" class="content_img">
+					<img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="content_img">
 					<img v-else src="@/assets/images/no-image.png" class="content_no_img">
 				</div>
 			</router-link>

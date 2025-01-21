@@ -58,7 +58,7 @@ main,
 }
 
 .main-menu-link {
-	font-size: 24px;
+	font-size: 20px;
 	color: #fff;
 	display: flex;
 	align-items: center;
@@ -296,9 +296,11 @@ a:hover {
 }
 
 .post-title {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
+	width: 90%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
 }
 
 .card-image-box img {
@@ -647,7 +649,6 @@ div.polaroid {
 }
 
 .img-my-post {
-	margin-top: 5px;
 	width: 60px !important;
 	height: 60px !important;
 	left: 5px !important;

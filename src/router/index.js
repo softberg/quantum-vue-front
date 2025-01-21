@@ -64,16 +64,20 @@ const router = createRouter({
 					path: 'my-posts',
 					name: 'my-posts',
 					component: () => import('@/views/MyPosts.vue'),
-					meta: { middleware: auth },
-                    children: [
-                        {
-                            path: 'amend/:uuid',
-                            name: 'amend',
-                            component: () => import('@/views/MyPosts.vue'),
-                            meta: { middleware: auth },
-                        }
-                    ]
+					meta: { middleware: auth }
 				},
+                {
+                    path: 'my-posts/create',
+                    name: 'create',
+                    component: () => import('@/views/Create.vue'),
+                    meta: { middleware: auth },
+                },
+                {
+                    path: 'my-posts/amend/:id',
+                    name: 'amend',
+                    component: () => import('@/views/Amend.vue'),
+                    meta: { middleware: auth },
+                }
 			],
 		},
 		{

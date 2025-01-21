@@ -43,7 +43,7 @@
         "created_successfully": "Успешно создано",
         "update_post": "Обновить Сообщение",
         "updated_successfully": "Успешно Обновлено",
-        "confirm_delete": "Вы уверены, что хотите удалить {%1} ?",
+        "confirm_delete": "Вы уверены, что хотите удалить {type} ?",
         "deleted_successfully": "Успешно удалено",
         "image": "изображение",
         "post": "публикацию",

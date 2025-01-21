@@ -1,11 +1,13 @@
 <script>
 import { ContentLoader } from 'vue-content-loader';
 import { PostAPI } from '@/helpers/post';
+import axiosInstance from "../helpers/axiosInstance";
 
 export default {
 	data() {
 		return {
-			post: null
+			post: null,
+            base_url: import.meta.env.VITE_BASE_URL
 		}
 	},
 
@@ -56,7 +58,7 @@ export default {
 							{{ post.author }}
 						</div>
 					</div>
-					<img v-if="post.image" :src="'/' + post.image" class="single_page_img">
+					<img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="single_page_img">
 					<p class="left-align single-blog-txt">
 						{{ post.content }}
 					</p>

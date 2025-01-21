@@ -34,7 +34,7 @@ export default {
 					this.alert.type = null;
 					this.alert.message = '';
 
-					this.$router.push({ name: 'signin' });
+					this.$router.push({ name: 'signin', params: { lang: this.$i18n.locale } });
 				}, 2000);
 			} else {
 				this.inProgress = false;

@@ -1,14 +1,17 @@
 <script>
-    import MyPostItem from '../components/MyPostItem.vue';
+    import DeletePost from '../components/post/DeletePost.vue';
+    import MyPostItem from '../components/post/MyPostItem.vue';
     import { PostAPI } from '@/helpers/post';
 
     export default {
         components: {
-            MyPostItem
+            MyPostItem,
+            DeletePost
         },
         data() {
             return {
                 myPosts: [],
+                id: null,
             }
         },
         mounted() {
@@ -25,22 +28,26 @@
                         this.myPosts = response?.data;
                     }
                 }
+            },
+            update() {
+                this.getMyPosts();
             }
         }
     }
 </script>
 
 <template>
-	<div class="posts-container">
-		<h2 class="center-align teal-text">{{ $t('message.my_posts') }}</h2>
-		<div class="row post_container">
+	<div class="main-wrapper posts-container">
+		<h1 class="center-align teal-text">{{ $t('message.my_posts') }}</h1>
+		<div class="row container">
 			<!-- <?php if (count($posts)): ?> -->
-			<ul class="collection">
-                <MyPostItem v-for="post in myPosts" :key="post.id" :post="post" />
+			<ul class="collection" v-if="myPosts.length">
+                <MyPostItem v-for="post in myPosts" :key="post.id" :post="post" @update:modelValue="(postId) => id = postId" />
 				<!-- <?php foreach ($posts as $post): ?> -->
 				<!-- <?php echo partial('post/partials/my-post-item', ['post' => $post]) ?> -->
 				<!-- <?php endforeach; ?> -->
 			</ul>
+            <h4 class="center-align grey-text" v-if="!myPosts.length">{{ $t('message.no_posts') }}... {{ $t('message.try_creating') }}</h4>
 		</div>
 		<!-- <?php else: ?>
 		<h4 class="center-align">
@@ -53,10 +60,14 @@
 
 		<!-- <?php if (auth()->check()): ?> -->
 		<div class="fixed-action-btn">
-			<a class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 hoverable"
-				href="/my-posts/create"><i class="material-icons">add</i>
-			</a>
+            <router-link 
+                :to="{ name: 'create', params: { lang: this.$i18n.locale } }"
+                class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 hoverable">
+                <i class="material-icons">add</i>
+            </router-link>
 		</div>
 		<!-- <?php endif; ?> -->
 	</div>
+
+    <DeletePost :id="id" @update:modelValue="update" />
 </template>
