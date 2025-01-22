@@ -58,7 +58,7 @@ main,
 }
 
 .main-menu-link {
-	font-size: 24px;
+	font-size: 20px;
 	color: #fff;
 	display: flex;
 	align-items: center;
@@ -296,9 +296,11 @@ a:hover {
 }
 
 .post-title {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
+	width: 90%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
 }
 
 .card-image-box img {
@@ -587,7 +589,7 @@ input[type=password] {
 .post-image {
 	position: relative;
 	width: 190px;
-	height: 150px;
+	max-height: 150px;
 	margin-bottom: 10px;
 }
 
@@ -606,10 +608,10 @@ input[type=password] {
 }
 
 div.polaroid {
-	background-color: white;
-	margin: 5px auto;
-	padding: 0 20px 20px;
-	position: relative;
+	width: 1000px;
+    margin: 0px auto;
+    padding: 0 20px 20px;
+    position: relative;
 }
 
 .post_image {
@@ -647,7 +649,6 @@ div.polaroid {
 }
 
 .img-my-post {
-	margin-top: 5px;
 	width: 60px !important;
 	height: 60px !important;
 	left: 5px !important;
@@ -665,4 +666,26 @@ div.polaroid {
 	.content_no_img {
 		width: 100% !important;
 	}
+}
+
+@media only screen and (max-width: 1200px) {
+    div.polaroid {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 993px) {
+    div.polaroid {
+        width: 100%;
+    }
+
+    .sidenav li>a>i.material-icons {
+        margin-right: 15px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar-logo img {
+        height: 44px;
+    }
 }

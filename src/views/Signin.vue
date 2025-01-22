@@ -35,7 +35,7 @@ export default {
 				this.alert.type = null;
 				this.alert.message = '';
 
-				this.$router.push({ name: 'home' });
+				this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
 			} else {
 				this.alert.type = response.status;
 				this.alert.message = response.message;

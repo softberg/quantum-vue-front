@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
 	<div class="footer-copyright teal accent-4">
 		<div class="container">
@@ -16,4 +12,3 @@
 		</div>
 	</div>
 </template>
-

@@ -1,8 +1,7 @@
 <script>
-import '@/assets/css/robot.css'
-
+    import '@/assets/css/robot.css'
 </script>
->
+
 <template>
 	<main class="grey lighten">
 		<div class="container">
@@ -61,7 +60,7 @@ import '@/assets/css/robot.css'
 </template>
 
 <style scoped>
-.st0 {
-	fill: #FFFFFF;
-}
+    .st0 {
+        fill: #FFFFFF;
+    }
 </style>

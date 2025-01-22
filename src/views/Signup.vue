@@ -1,52 +1,52 @@
 <script>
-import { AuthAPI } from '@/helpers/auth';
-import PasswordField from '@/components/PasswordField.vue';
-import AlertMessage from '@/components/AlertMessage.vue';
+    import { AuthAPI } from '@/helpers/auth';
+    import PasswordField from '@/components/PasswordField.vue';
+    import AlertMessage from '@/components/AlertMessage.vue';
 
-export default {
-	data() {
-		return {
-			form: {
-				email: '',
-				password: '',
-				firstname: '',
-				lastname: '',
-			},
-			alert: {
-				type: null,
-				message: ''
-			},
-			inProgress: false
-		}
-	},
+    export default {
+        data() {
+            return {
+                form: {
+                    email: '',
+                    password: '',
+                    firstname: '',
+                    lastname: '',
+                },
+                alert: {
+                    type: null,
+                    message: ''
+                },
+                inProgress: false
+            }
+        },
 
-	methods: {
-		async submit() {
-			this.inProgress = true;
+        methods: {
+            async submit() {
+                this.inProgress = true;
 
-			let response = await AuthAPI.signup(this.form);
+                let response = await AuthAPI.signup(this.form);
 
-			this.alert.type = response.status
-			this.alert.message = response.message;
+                this.alert.type = response.status
+                this.alert.message = response.message;
 
-			if (response.status == 'success') {
-				setTimeout(() => {
-					this.alert.type = null;
-					this.alert.message = '';
+                if (response.status == 'success') {
+                    setTimeout(() => {
+                        this.alert.type = null;
+                        this.alert.message = '';
 
-					this.$router.push({ name: 'signin' });
-				}, 2000);
-			} else {
-				this.inProgress = false;
-			}
-		}
-	},
+                        this.$router.push({ name: 'signin', params: { lang: this.$i18n.locale } });
+                    }, 2000);
+                } else {
+                    this.inProgress = false;
+                }
+            }
+        },
 
-	components: {
-		PasswordField,
-		AlertMessage
-	}
-}
+        components: {
+            PasswordField,
+            AlertMessage
+        }
+    }
 </script>
 
 <template>

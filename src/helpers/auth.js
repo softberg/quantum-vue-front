@@ -35,7 +35,7 @@ export const AuthAPI = {
 
 	async signup(form) {
 		try {
-			let response = await axiosInstance.post('/signup', form);
+			let response = await axiosInstance.post('/api/signup', form);
 
 			if (response.data.status !== 'success') {
 				let message = null;

@@ -2,15 +2,21 @@
     export default {
         props: {
             post: Object
+        },
+        data() {
+            return {
+                base_url: import.meta.env.VITE_BASE_URL
+            }
         }
     }
 </script>
+
 <template>
 	<div class="col s12 m3 post-item">
 		<div class="card post-card hoverable">
-			<router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale } }">
+			<router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale, route: 'posts' } }">
 				<div class="card-image card-image-box">
-					<img v-if="post.image" :src="'/' + post.image" class="content_img">
+					<img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="content_img">
 					<img v-else src="@/assets/images/no-image.png" class="content_no_img">
 				</div>
 			</router-link>

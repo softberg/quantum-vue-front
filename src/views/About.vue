@@ -1,17 +1,18 @@
 <script>
-import Bubbles from '@/components/Bubbles.vue';
+    import Bubbles from '@/components/Bubbles.vue';
 
-export default {
-    data() {
-        return {
-            appVersion: import.meta.env.VITE_APP_VERSION,
+    export default {
+        data() {
+            return {
+                appVersion: import.meta.env.VITE_APP_VERSION,
+            }
+        },
+        components: {
+            Bubbles
         }
-    },
-	components: {
-		Bubbles
-	}
-}
+    }
 </script>
+
 <template>
 	<div class="main-wrapper teal accent-4 full-height">
 		<div class="container wrapper center-align white-text">

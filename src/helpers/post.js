@@ -8,7 +8,7 @@ export const PostAPI = {
 			return response.data;
 
 		} catch (err) {
-			return null;
+			return err;
 		}
 	},
 
@@ -19,7 +19,7 @@ export const PostAPI = {
 			return response.data;
 
 		} catch (err) {
-			return null;
+			return err;
 		}
 	},
 
@@ -34,7 +34,65 @@ export const PostAPI = {
 			return response.data;
 		}
 		catch (err) {
-			return null;
+			return err;
 		}
-	}
+	},
+
+    async createPost(postData) {
+        try {
+            const response = await axiosInstance.post('api/my-posts/create', postData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${ localStorage.getItem('accessToken') }`,
+                },
+            });
+
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    async amendPost(postData, id) {
+        try {
+            const response = await axiosInstance.put(`api/my-posts/amend/${ id }`, postData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${ localStorage.getItem('accessToken') }`,
+                },
+            });
+
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    async deleteImage(id) {
+        try {
+            const response = await axiosInstance.delete(`/api/my-posts/delete-image/${ id }`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
+
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    async deletePost(id) {
+        try {
+            const response = await axiosInstance.delete(`/api/my-posts/delete/${ id }`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
+
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
