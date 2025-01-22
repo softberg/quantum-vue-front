@@ -24,6 +24,8 @@
 
             if (response) {
                 this.post = response.data;
+
+                document.title = this.post.title + ' | ' + this.$router.options.defaultPageTitle;
             } else {
                 this.$router.push({
                     name: 'not-found',

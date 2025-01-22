@@ -22,7 +22,7 @@
 			</div>
 			<div class="index-links">
 				<router-link :to="{ name: 'about', params: { lang: this.$i18n.locale }}" class="white-text">{{ $t('message.about') }}</router-link>
-				<a href="https://quantum.softberg.org" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
+				<a href="https://quantumphp.io" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
 			</div>
 		</div>
 	</div>

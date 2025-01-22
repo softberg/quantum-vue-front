@@ -12,7 +12,8 @@
         data() {
             return {
                 base_url: import.meta.env.VITE_BASE_URL,
-                moment
+                moment,
+                postDateTime: moment(this.post.date).format('MM/DD/YYYY HH:mm')
             }
         }
     }
@@ -30,7 +31,7 @@
             {{ post.title }}
         </router-link>
 
-        <p>{{ moment(post.date).format('MM/DD/YYYY HH:mm') }}</p>
+        <p>{{ postDateTime }}</p>
 
 		<router-link 
             :to="{ name: 'amend', params: { id: post.id, lang: this.$i18n.locale } }"

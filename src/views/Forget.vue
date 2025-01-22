@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="row">
 				<div class=" col s12 l8 offset-l2 center-align white-text">
-					<h1>Forgot Password?</h1>
+					<h1>{{ $t('message.forget_password') }}</h1>
 
 					<!-- <ErrorMessage /> -->
 					<!-- <SuccessMessage /> -->
@@ -29,15 +29,15 @@
 							<form method="post" :action="generateForgetUrl">
 								<div class="input-field col s12">
 									<input type="text" name="email" id="email" />
-									<label for="email" class="white-text">Email</label>
+									<label for="email" class="white-text">{{ $t('message.email') }}</label>
 								</div>
 								<div class="row">
 									<div class="col s12 right-align">
-										<router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }" class="white-text">Signin</router-link>
+										<router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }" class="white-text">{{ $t('message.signin') }}</router-link>
 									</div>
 								</div>
 								<div>
-									<button class="btn btn-large waves-effect waves-light" type="button">Send</button>
+									<button class="btn btn-large waves-effect waves-light" type="button">{{ $t('message.send') }}</button>
 								</div>
 							</form>
 						</div>

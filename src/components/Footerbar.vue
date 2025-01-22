@@ -6,7 +6,7 @@
 					© 2018 - {{ new Date().getFullYear() }} Quantum PHP Framework
 				</div>
 				<div class="col s12 l2 footer-text">
-					<a href="https://quantum.softberg.org" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
+					<a href="https://quantumphp.io" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
 				</div>
 			</div>
 		</div>
