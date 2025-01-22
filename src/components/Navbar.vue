@@ -1,42 +1,42 @@
 <script>
-import LangSwitcher from '@/components/LangSwitcher.vue';
-import { AuthAPI } from '@/helpers/auth';
-import { store } from '@/store';
+    import LangSwitcher from '@/components/LangSwitcher.vue';
+    import { AuthAPI } from '@/helpers/auth';
+    import { store } from '@/store';
 
-export default {
-	components: {
-		LangSwitcher
-	},
+    export default {
+        components: {
+            LangSwitcher
+        },
 
-	data() {
-		return {
-			store
-		}
-	},
+        data() {
+            return {
+                store
+            }
+        },
 
-	mounted() {
-		M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
-	},
+        mounted() {
+            M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
+        },
 
-	updated() {
-		M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
-	},
+        updated() {
+            M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
+        },
 
-	methods: {
-		async signout() {
-			let response = await AuthAPI.signout(localStorage.getItem('refreshToken'));
+        methods: {
+            async signout() {
+                let response = await AuthAPI.signout(localStorage.getItem('refreshToken'));
 
-			if (response) {
-				this.store.setUser(null);
+                if (response) {
+                    this.store.setUser(null);
 
-				localStorage.removeItem('accessToken');
-				localStorage.removeItem('refreshToken');
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
 
-				this.$router.push({ name: 'home' });
-			}
-		}
-	}
-}
+                    this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
+                }
+            }
+        }
+    }
 </script>
 
 <template>

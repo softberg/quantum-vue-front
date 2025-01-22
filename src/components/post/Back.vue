@@ -1,8 +1,8 @@
 <script>
     export default {
-        data () {
-            return {
-
+        props: {
+            route: {
+                type: String
             }
         }
     }
@@ -12,7 +12,7 @@
     <router-link 
         className="back-btn"
         title="Back"
-        :to="{ name: 'my-posts', params: { lang: this.$i18n.locale } }">
+        :to="{ name: route, params: { lang: this.$i18n.locale } }">
         <i class="material-icons">arrow_back</i>
     </router-link>
 </template>

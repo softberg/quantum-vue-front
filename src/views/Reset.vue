@@ -1,11 +1,11 @@
 <script>
-import PasswordField from '@/components/PasswordField.vue';
+    import PasswordField from '@/components/PasswordField.vue';
 
-export default {
-	components: {
-		PasswordField
-	}
-}
+    export default {
+        components: {
+            PasswordField
+        }
+    }
 </script>
 
 <template>

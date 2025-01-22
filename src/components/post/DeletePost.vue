@@ -2,11 +2,6 @@
     import { PostAPI } from '@/helpers/post';
 
     export default {
-        data() {
-            return {
-                
-            }
-        },
         props: {
             id: {
                 type: String,
@@ -23,8 +18,7 @@
                 let response = await PostAPI.deletePost(this.id);
 
                 if (response.status == 'success') {
-                    this.$router.push({ name: 'my-posts', params: { lang: this.$i18n.locale } });
-                    this.$emit('update:modelValue', this.$forceUpdate())
+                    this.$emit('update:modelValue', this.id);
 
                 } else {
                     this.inProgress = false;
@@ -40,11 +34,8 @@
             <p>{{ $t('message.confirm_delete', { type: $t('message.post') }) }}</p>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">{{ $t('message.cancel') }}</a>
-            <a href="#!" @click="submit" class="modal-close waves-effect waves-green btn-flat btn red lighten-2 white-text">{{ $t('message.yes') }}</a>
+            <a class="modal-close waves-effect waves-green btn-flat">{{ $t('message.cancel') }}</a>
+            <a @click="submit" class="modal-close waves-effect waves-green btn-flat btn red lighten-2 white-text">{{ $t('message.yes') }}</a>
         </div>
     </div>
 </template>
-
-<style scoped>
-</style>

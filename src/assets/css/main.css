@@ -589,7 +589,7 @@ input[type=password] {
 .post-image {
 	position: relative;
 	width: 190px;
-	height: 150px;
+	max-height: 150px;
 	margin-bottom: 10px;
 }
 
@@ -608,10 +608,10 @@ input[type=password] {
 }
 
 div.polaroid {
-	background-color: white;
-	margin: 5px auto;
-	padding: 0 20px 20px;
-	position: relative;
+	width: 1000px;
+    margin: 0px auto;
+    padding: 0 20px 20px;
+    position: relative;
 }
 
 .post_image {
@@ -666,4 +666,26 @@ div.polaroid {
 	.content_no_img {
 		width: 100% !important;
 	}
+}
+
+@media only screen and (max-width: 1200px) {
+    div.polaroid {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 993px) {
+    div.polaroid {
+        width: 100%;
+    }
+
+    .sidenav li>a>i.material-icons {
+        margin-right: 15px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar-logo img {
+        height: 44px;
+    }
 }

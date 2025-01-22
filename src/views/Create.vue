@@ -2,11 +2,6 @@
     import Form from '@/components/post/Form.vue'
 
     export default {
-        data() {
-            return {
-
-            }
-        },
         components: {
             Form
         }
@@ -16,6 +11,3 @@
 <template>
     <Form />
 </template>
-
-<style scoped>
-</style>

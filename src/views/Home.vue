@@ -1,11 +1,11 @@
 <script>
-import Bubbles from '@/components/Bubbles.vue';
+    import Bubbles from '@/components/Bubbles.vue';
 
-export default {
-	components: {
-		Bubbles
-	}
-}
+    export default {
+        components: {
+            Bubbles
+        }
+    }
 </script>
 
 <template>

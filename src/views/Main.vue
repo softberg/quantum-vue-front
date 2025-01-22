@@ -1,47 +1,47 @@
 <script>
-import NavBar from "@/components/Navbar.vue";
-import FooterBar from "@/components/Footerbar.vue";
-import { AuthAPI } from "@/helpers/auth";
-import { store } from '@/store';
+    import NavBar from "@/components/Navbar.vue";
+    import FooterBar from "@/components/Footerbar.vue";
+    import { AuthAPI } from "@/helpers/auth";
+    import { store } from '@/store';
 
-export default {
-	components: {
-		NavBar,
-		FooterBar
-	},
+    export default {
+        components: {
+            NavBar,
+            FooterBar
+        },
 
-	data() {
-		return {
-			store
-		}
-	},
+        data() {
+            return {
+                store
+            }
+        },
 
-	mounted() {
-		this.checkUser();
-        this.setLang();
-	},
+        mounted() {
+            this.checkUser();
+            this.setLang();
+        },
 
-	updated() {
-		this.checkUser();
-	},
+        updated() {
+            this.checkUser();
+        },
 
-	methods: {
-		async checkUser() {
-			const accessToken = localStorage.getItem('accessToken');
+        methods: {
+            async checkUser() {
+                const accessToken = localStorage.getItem('accessToken');
 
-			if (accessToken && !this.store.user) {
-				let user = await AuthAPI.getUser(accessToken);
+                if (accessToken && !this.store.user) {
+                    let user = await AuthAPI.getUser(accessToken);
 
-				if (user) {
-					this.store.setUser(user);
-				}
-			}
-		},
-        setLang() {
-            this.$i18n.locale = this.$route.params.lang;
+                    if (user) {
+                        this.store.setUser(user);
+                    }
+                }
+            },
+            setLang() {
+                this.$i18n.locale = this.$route.params.lang;
+            }
         }
-	}
-}
+    }
 </script>
 
 <template>
@@ -51,7 +51,7 @@ export default {
 	<main>
 		<router-view v-slot="{ Component, route }">
 			<transition name="fade" mode="out-in">
-				<div :key="route.name" class="main-inner">
+				<div :key="route.name" class="post-form full-height main-inner">
 					<component :is="Component"></component>
 				</div>
 			</transition>
@@ -61,4 +61,3 @@ export default {
 		<FooterBar />
 	</footer>
 </template>
-

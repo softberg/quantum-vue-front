@@ -1,29 +1,30 @@
 <script>
-import { ContentLoader } from 'vue-content-loader';
-import PostItem from '@/components/PostItem.vue';
-import { PostAPI } from '@/helpers/post';
+    import { ContentLoader } from 'vue-content-loader';
+    import PostItem from '@/components/PostItem.vue';
+    import { PostAPI } from '@/helpers/post';
 
-export default {
-	data() {
-		return {
-			posts: null
-		}
-	},
+    export default {
+        data() {
+            return {
+                posts: null
+            }
+        },
 
-	components: {
-		ContentLoader,
-		PostItem
-	},
+        components: {
+            ContentLoader,
+            PostItem
+        },
 
-	async mounted() {
-		let response = await PostAPI.getPosts();
+        async mounted() {
+            let response = await PostAPI.getPosts();
 
-		if (response) {
-			this.posts = response.data;
-		}
-	}
-}
+            if (response) {
+                this.posts = response.data;
+            }
+        }
+    }
 </script>
+
 <template>
 	<div class="main-wrapper">
 		<h1 class="center-align teal-text">{{ $t('message.posts') }}</h1>

@@ -2,14 +2,9 @@
     import { PostAPI } from '@/helpers/post';
 
     export default {
-        data() {
-            return {
-                
-            }
-        },
         props: {
             id: {
-                type: Number
+                type: String
             }
         },
         async mounted() {
@@ -43,6 +38,3 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-</style>

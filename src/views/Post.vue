@@ -1,36 +1,41 @@
 <script>
-import { ContentLoader } from 'vue-content-loader';
-import { PostAPI } from '@/helpers/post';
-import axiosInstance from "../helpers/axiosInstance";
+    import { ContentLoader } from 'vue-content-loader';
+    import { PostAPI } from '@/helpers/post';
+    import Back from '../components/post/Back.vue';
 
-export default {
-	data() {
-		return {
-			post: null,
-            base_url: import.meta.env.VITE_BASE_URL
-		}
-	},
+    export default {
+        data() {
+            return {
+                post: null,
+                base_url: import.meta.env.VITE_BASE_URL
+            }
+        },
+        components: {
+            ContentLoader,
+            Back
+        },
+        props: {
+            route: {
+                type: String
+            }
+        },
+        async mounted() {
+            let response = await PostAPI.getPost(this.$route.params.id);
 
-	components: {
-		ContentLoader,
-	},
-
-	async mounted() {
-		let response = await PostAPI.getPost(this.$route.params.id);
-
-		if (response) {
-			this.post = response.data;
-		} else {
-			this.$router.push({
-				name: 'not-found',
-				params: { pathMatch: this.$route.path.substring(1).split('/') },
-				query: this.$route.query,
-				hash: this.$route.hash,
-			});
-		}
-	}
-}
+            if (response) {
+                this.post = response.data;
+            } else {
+                this.$router.push({
+                    name: 'not-found',
+                    params: { pathMatch: this.$route.path.substring(1).split('/') },
+                    query: this.$route.query,
+                    hash: this.$route.hash,
+                });
+            }
+        }
+    }
 </script>
+
 <template>
 	<div class="main-wrapper">
 		<div class="center-align container">
@@ -43,9 +48,7 @@ export default {
 					</ContentLoader>
 				</div>
 				<div v-else>
-					<router-link :to="{ name: 'posts' }" title="Back" class="back-btn">
-						<i class="material-icons">arrow_back</i>
-					</router-link>
+                    <Back :route="this.$route.params.route" />
 
 					<h1 class="single-blog-title">
 						{{ post.title }}
