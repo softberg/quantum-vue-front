@@ -1,9 +1,9 @@
 import axiosInstance from "@/helpers/axiosInstance";
 
 export const PostAPI = {
-	async getPosts() {
+	async getPosts(params) {
 		try {
-			let response = await axiosInstance.get('/api/posts');
+			let response = await axiosInstance.get('/api/posts', { params });
 
 			return response.data;
 

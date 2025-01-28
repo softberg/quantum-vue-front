@@ -22,8 +22,8 @@
 		<small class="hide-on-small-only show-on-medium-and-up">{{ $t('message.lang') }}</small>
 	</a>
 	<ul id="dropdown2" class="dropdown-content">
-		<li v-for="lang in langs" :lang="lang" :id="lang.id">
-			<router-link :to="{ name: this.$route.name, params: { lang: lang.id } }" @click="this.$i18n.locale=lang.id">{{ lang.text }}</router-link>
+		<li v-for="lang in langs" :lang="lang.key" :id="lang.id">
+			<router-link :to="{ name: this.$route.name, params: { lang: lang.id }, query: this.store.params  }" @click="this.$i18n.locale=lang.id">{{ lang.text }}</router-link>
 		</li>
 	</ul>
 </template>

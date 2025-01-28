@@ -1,6 +1,6 @@
 <script>
-    import DeletePost from '../components/post/DeletePost.vue';
-    import MyPostItem from '../components/post/MyPostItem.vue';
+    import DeletePost from '@/components/post/DeletePost.vue';
+    import MyPostItem from '@/components/post/MyPostItem.vue';
     import { PostAPI } from '@/helpers/post';
 
     export default {

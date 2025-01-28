@@ -63,21 +63,29 @@ const router = createRouter({
 				{
 					path: 'my-posts',
 					name: 'my-posts',
-					component: () => import('@/views/MyPosts.vue'),
-					meta: { middleware: auth }
-				},
-                {
-                    path: 'my-posts/create',
-                    name: 'create',
-                    component: () => import('@/views/Create.vue'),
-                    meta: { middleware: auth },
-                },
-                {
-                    path: 'my-posts/amend/:id',
-                    name: 'amend',
-                    component: () => import('@/views/Amend.vue'),
-                    meta: { middleware: auth },
-                }
+					component: () => import('@/views/MyPosts/MyPosts.vue'),
+					meta: { middleware: auth },
+                    children: [
+                        {
+                            path: '',
+                            name: 'my-post-list',
+                            component: () => import('@/views/MyPosts/List.vue'),
+                            meta: { middleware: auth }
+                        },
+                        {
+                            path: 'create',
+                            name: 'create',
+                            component: () => import('@/views/MyPosts/Create.vue'),
+                            meta: { middleware: auth },
+                        },
+                        {
+                            path: 'amend/:id',
+                            name: 'amend',
+                            component: () => import('@/views/MyPosts/Amend.vue'),
+                            meta: { middleware: auth },
+                        }
+                    ]
+				}
 			],
 		},
 		{

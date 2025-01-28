@@ -24,7 +24,7 @@
         <img v-else :src="this.base_url + '/assets/images/no-image.png'" class="circle img-my-post">
 
         <router-link 
-            :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale, route: 'my-posts' } }"
+            :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale, route: 'my-post-list' } }"
             :title="post.title"
             class="title post-title teal-text">
             {{ post.title }}

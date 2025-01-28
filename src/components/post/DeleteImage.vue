@@ -17,7 +17,7 @@
                 let response = await PostAPI.deleteImage(this.id);
 
                 if (response.status == 'success') {
-                    this.$router.push({ name: 'my-posts', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'my-post-list', params: { lang: this.$i18n.locale } });
 
                 } else {
                     this.inProgress = false;

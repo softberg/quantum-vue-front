@@ -63,7 +63,7 @@
                 }
 
                 if (response.status == 'success') {
-                    this.$router.push({ name: 'my-posts', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'my-post-list', params: { lang: this.$i18n.locale } });
 
                 } else {
                     this.inProgress = false;
@@ -77,7 +77,7 @@
 
 <template>
     <div class="polaroid">
-        <Back :route="'my-posts'" />
+        <Back :route="'my-post-list'" />
         <div class="row">
             <div class="col s12">
                 <h1 class="center-align teal-text">{{ post.id ? $t('message.update_post') : $t('message.new_post') }}</h1>
@@ -131,7 +131,7 @@
                                 </button>
 
                                 <router-link 
-                                    :to="{ name: 'my-posts', params: { lang: this.$i18n.locale } }"
+                                    :to="{ name: 'my-post-list', params: { lang: this.$i18n.locale } }"
                                     class="btn btn-large waves-effect waves-teal btn-flat white-text cancel-btn">
                                     {{ $t('message.cancel') }}
                                 </router-link>
