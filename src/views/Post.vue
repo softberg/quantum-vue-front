@@ -48,7 +48,7 @@
 					</ContentLoader>
 				</div>
 				<div v-else>
-                    <Back :route="this.$route.params.route" />
+                    <Back :route="$route.params.route || 'posts'" />
 
 					<h1 class="single-blog-title">
 						{{ post.title }}

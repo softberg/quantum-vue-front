@@ -24,7 +24,7 @@
             Pagination
         },
         async mounted() {
-            if (this.$route?.query.q == '' || this.$route.params.fromBack) {
+            if (this.$route.query.q == '' || this.$route.params.fromBack) {
                 let params = {};
 
                 if (this.page) {
@@ -78,7 +78,7 @@
             }
         },
         watch: {
-            'store.searchText': function (e) {
+            'store.searchText': function (q) {
                 let params = {};
 
                 if (this.mounted) {
@@ -93,16 +93,21 @@
                     this.mounted = false;
                 }
 
-                params['q'] = e;
-
                 const updatedQuery = { ...this.$route.query };
                 delete updatedQuery.page;
                 delete updatedQuery.per_page;
-                updatedQuery.q = e;
-                
-                this.$router.replace({ query: updatedQuery });
 
+                if (q) {
+                    params['q'] = q;
+                    updatedQuery.q = q;
+                }
+                
                 this.postsAction(params);
+            },
+            '$route.params.render': function(render) {
+                if (render) {
+                    this.postsAction({});
+                }
             }
         }
     }

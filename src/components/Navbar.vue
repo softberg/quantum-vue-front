@@ -3,6 +3,7 @@
     import { AuthAPI } from '@/helpers/auth';
     import { store } from '@/store';
     import Search from './Search.vue';
+    import moment from 'moment';
 
     export default {
         components: {
@@ -74,6 +75,8 @@
                 delete this.$route.query.page;
                 delete this.$route.query.per_page;
                 store.searchText = '';
+
+                this.$router.push({ name: 'posts', params: { lang: this.$i18n.locale, render: moment().valueOf() } });
             }
         }
     }
