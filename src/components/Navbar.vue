@@ -38,38 +38,16 @@
                     this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
                 }
             },
-            homeLink() {
+
+            link(name) {
                 return {
-                    name: 'home',
+                    name,
                     params: {
                         lang: this.$i18n.locale
                     }
                 };
             },
-            postsLink() {
-                return {
-                    name: 'posts',
-                    params: {
-                        lang: this.$i18n.locale
-                    }
-                };
-            },
-            signupLink() {
-                return {
-                    name: 'signup',
-                    params: {
-                        lang: this.$i18n.locale
-                    } 
-                };
-            },
-            signinLink() {
-                return {
-                    name: 'signin',
-                    params: {
-                        lang: this.$i18n.locale
-                    }
-                };
-            },
+
             render() {
                 delete this.$route.query;
 
@@ -83,7 +61,7 @@
 	<nav class="teal accent-4">
 		<div class="nav-wrapper row">
 			<span class="navbar-logo" v-show="$route.name !== 'home'">
-				<router-link :to="homeLink()">
+				<router-link :to="link('home')">
 					<img alt="Quantum PHP Framework" class="logo" src="@/assets/images/quantum-logo-white.png" />
 				</router-link>
 			</span>
@@ -92,7 +70,7 @@
                 <Search v-if="$route.name == 'posts'" />
 
 				<li>
-					<router-link :to="postsLink()" class="white-text" @click="render">
+					<router-link :to="link('posts')" class="white-text" @click="render">
                         {{ $t('message.posts') }}
                     </router-link>
 				</li>
@@ -123,10 +101,10 @@
 
 				<template v-else>
 					<li v-if="$route.name != 'signup'">
-						<router-link :to="signupLink()" class="white-text">{{ $t('message.signup') }}</router-link>
+						<router-link :to="link('signup')" class="white-text">{{ $t('message.signup') }}</router-link>
 					</li>
 					<li v-if="$route.name != 'signin'">
-						<router-link :to="signinLink()" class="white-text">{{ $t('message.signin') }}</router-link>
+						<router-link :to="link('signin')" class="white-text">{{ $t('message.signin') }}</router-link>
 					</li>
 				</template>
 
