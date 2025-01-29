@@ -5,7 +5,9 @@
         data() {
             return {
                 pageCount: 0,
-                store
+                store,
+                page: this.$route.query?.page || (this.defaultPage = 1),
+                per_page: this.$route.query?.per_page || (this.defaultPerPage = 8)
             }
         },
         props: {
@@ -13,87 +15,26 @@
                 type: Object,
                 required: true
             },
-            page: {
-                type: Number,
-                required: true,
-                default: 1
-            },
-            per_page: {
-                type: Number,
-                required: true,
-                default: 8
-            },
-            posts: {
-                type: Array
+            q: {
+                type: String
             }
         },
         mounted() {
-            this.pageCount = Math.ceil(this.pagination?.total_records / this.per_page);
+            this.pageCount = Math.ceil(this.pagination.total_records / this.per_page);
         },
         methods: {
-            prevLink() {
+            link(page) {
                 return {
                     name: this.$route.name,
                     params: {
-                        lang: this.$i18n.locale,
-                        q: store.searchText || this.$route?.query?.q
-                    },
-                    query: {
-                        page: this.pagination?.prev_page,
-                        per_page: this.per_page,
-                        q: store.searchText || this.$route?.query?.q
-                    }
-                };
-            },
-            currentLink(index) {
-                return {
-                    name: this.$route.name,
-                    params: {
-                        lang: this.$i18n.locale,
-                        q: store.searchText || this.$route?.query?.q
-                    },
-                    query: {
-                        page: index + 1,
-                        per_page: this.per_page,
-                        q: store.searchText || this.$route?.query?.q
-                    }
-                };
-            },
-            nextLink() {
-                return {
-                    name: this.$route.name,
-                    params: {
-                        lang: this.$i18n.locale,
-                        q: store.searchText || this.$route?.query?.q
+                        lang: this.$i18n.locale
                     },
                     query: { 
-                        page: this.pagination?.next_page,
+                        page,
                         per_page: this.per_page,
-                        q: store.searchText || this.$route?.query?.q
+                        q: this.q
                     }
                 };
-            },
-            
-            prevClickEvent() {
-                this.$emit('update:modelValue', {
-                    page: this.pagination?.prev_page,
-                    per_page: this.per_page,
-                    q: store.searchText || this.$route?.query?.q
-                });
-            },
-            currentClickEvent(index) {
-                this.$emit('update:modelValue', {
-                    page: index + 1,
-                    per_page: this.per_page,
-                    q: store.searchText || this.$route?.query?.q
-                })
-            },
-            nextClickEvent() {
-                this.$emit('update:modelValue', {
-                    page: this.pagination?.next_page,
-                    per_page: this.per_page,
-                    q: store.searchText || this.$route?.query?.q
-                })
             }
         }
     }
@@ -103,19 +44,19 @@
     <div class="center-align">
         <ul class="pagination">
             <li v-if="pagination?.current_page > pagination?.prev_page">
-                <router-link :to="prevLink()" @click="prevClickEvent()"
+                <router-link :to="link(this.pagination.prev_page)"
                     v-html="$t('message.pagination.prev')">
                 </router-link>
             </li>
 
             <li v-for="(item, index) in pageCount" :class="{ active: (index + 1) == pagination?.current_page }">
-                <router-link @click="currentClickEvent(index)" :to="currentLink(index)">
+                <router-link :to="link(index + 1)">
                     {{ index + 1 }}
                 </router-link>
             </li>
 
             <li v-if="pagination?.current_page < pagination?.next_page">
-                <router-link :to="nextLink()" @click="nextClickEvent()"
+                <router-link :to="link(this.pagination.next_page)"
                     v-html="$t('message.pagination.next')">
                 </router-link>
             </li>

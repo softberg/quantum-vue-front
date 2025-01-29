@@ -2,112 +2,73 @@
     import { ContentLoader } from 'vue-content-loader';
     import PostItem from '@/components/PostItem.vue';
     import { PostAPI } from '@/helpers/post';
-    import Pagination from '@/components/PaginationBlock.vue';
-    import { store } from '@/store';
+    import PaginationBlock from '@/components/PaginationBlock.vue';
 
     export default {
         data() {
             return {
                 posts: [],
                 pagination: null,
-                page: this.$route?.query?.page,
-                per_page: this.$route?.query?.per_page,
-                store,
+                defaultPage: 1,
+                defaultPerPage: 8,
+                page: this.$route.query?.page || this.defaultPage,
+                per_page: this.$route.query?.per_page || this.defaultPerPage,
+                q: this.$route?.query?.q,
                 hidden: false,
-                mounted: true
-
             }
         },
+
         components: {
             ContentLoader,
             PostItem,
-            Pagination
+            PaginationBlock
         },
+
         async mounted() {
-            if (this.$route.query.q == '' || this.$route.params.fromBack) {
-                let params = {};
-
-                if (this.page) {
-                    params['page'] = this.page;
-                }
-
-                if (this.per_page) {
-                    params['per_page'] = this.per_page;
-                }
-
-                this.postsAction(params);
-            }
+            this.postsAction({
+                page: this.page,
+                per_page: this.per_page,
+                q: this.q,
+            });
         },
+
         methods: {
             async postsAction(params) {
                 this.posts = [];
-
                 let response = await PostAPI.getPosts(params);
 
                 if (response) {
                     this.posts = response.data;
                     this.pagination = response?.pagination;
                 }
-
-                if (!this.posts?.length) {
-                    this.hidden = true;
-                }
-
-                store.params = params;
             },
-            update(e) {
-                let params = {
-                    'page': e?.page,
-                    'per_page': e?.per_page
-                };
 
-                if (this.$route.query.q) {
-                    params['q'] = this.$route.query.q;
-                }
-                
-                this.postsAction(params);
+            update(query) {
+                this.postsAction(query);
             },
+
             showPagination() {
                 if (this.pagination && 
                     this.posts?.length && 
-                    (this.pagination.total_records > (this.per_page || 8))) {
+                    (this.pagination.total_records > (this.per_page || this.defaultPerPage))) {
                         return true;
                 }
 
                 return false;
             }
         },
+
         watch: {
-            'store.searchText': function (q) {
-                let params = {};
-
-                if (this.mounted) {
-                    if (this.page) {
-                        params['page'] = this.page;
-                    }
-
-                    if (this.per_page) {
-                        params['per_page'] = this.per_page;
-                    }
-
-                    this.mounted = false;
-                }
-
-                const updatedQuery = { ...this.$route.query };
-                delete updatedQuery.page;
-                delete updatedQuery.per_page;
-
-                if (q) {
-                    params['q'] = q;
-                    updatedQuery.q = q;
-                }
-                
-                this.postsAction(params);
-            },
             '$route.params.render': function(render) {
                 if (render) {
                     this.postsAction({});
                 }
+            },
+
+            '$route.query': function() {
+                this.q = this.$route?.query?.q;
+
+                this.postsAction(this.$route.query);
             }
         }
     }
@@ -117,8 +78,8 @@
 	<div class="main-wrapper">
 		<h1 class="center-align teal-text">{{ $t('message.posts') }}</h1>
         <TransitionGroup name="list" tag="div" className="row post_container">
-            <template v-if="!posts?.length">
-				<div class="col s12 m3 post-item" v-for="index in 8" :key="index" :class="{ hide: hidden }">
+            <template v-if="!posts.length">
+				<div class="col s12 m3 post-item" v-for="index in 8" :key="index">
 					<content-loader viewBox="0 0 476 536" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
 						<rect x="0" y="0" rx="5" ry="5" width="100%" height="349" />
 						<rect x="5%" y="383" rx="10" ry="10" width="90%" height="20" />
@@ -137,11 +98,10 @@
 			</template>
         </TransitionGroup>
 
-        <Pagination
+        <PaginationBlock
             v-if="showPagination()"
             :pagination="pagination"
-            :page="page"
-            :per_page="per_page"
+            :q="this.q"
             @update:modelValue="update"/>
 	</div>
 </template>

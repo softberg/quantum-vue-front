@@ -4,6 +4,7 @@
     import { store } from '@/store'
     import DeleteImage from './DeleteImage.vue'
     import ErrorMessage from '../messages/ErrorMessage.vue'
+    import moment from 'moment';
 
     export default {
         data() {
@@ -11,6 +12,7 @@
                 base_url: import.meta.env.VITE_BASE_URL,
                 store,
                 errorMessage: '',
+                moment
             }
         },
         props: {
@@ -53,7 +55,7 @@
                 postData.append('title', this.title);
                 postData.append('content', this.content);
                 postData.append('image', this.image);
-                postData.append('updated_at', new Date());
+                postData.append('updated_at', moment().format('DD/MM/YYYY HH:mm:ss'));
 
                 if (this.post.id) {
                     response = await PostAPI.amendPost(postData, this.post.id);

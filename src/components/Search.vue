@@ -1,24 +1,15 @@
 <script>
-    import { store } from '@/store';
-    import Posts from '@/views/Posts.vue';
-
     export default {
         data() {
             return {
                 timeOut: null,
-                searchText: '',
-                store,
-                Posts,
-                autofocus: false
+                searchText: this.$route.query.q
             }
         },
         mounted() {
-            this.searchText = this.$route.query.q;
-            this.autofocus = this.searchText ? true : false;
-            delete this.$route?.query?.page;
-            delete this.$route?.query?.per_page;
+            delete this.$route.query;
 
-            if (this.autofocus) {
+            if (this.searchText) {
                 document.querySelector('.search-bar').focus();
             }
         },
@@ -28,16 +19,14 @@
             }
 
             this.timeOut = setTimeout(() => {
-                store.setSearchText(this.searchText);
-
                 this.$router.push({
                     name: 'posts',
                     params: {
                         lang: this.$i18n.locale
                     },
                     query: {
-                        page: this.$route?.query?.page,
-                        per_page: this.$route?.query?.per_page,
+                        page: this.page,
+                        per_page: this.per_page,
                         q: this.searchText
                     }
                 });

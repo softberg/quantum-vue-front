@@ -71,10 +71,7 @@
                 };
             },
             render() {
-                delete this.$route.query.q;
-                delete this.$route.query.page;
-                delete this.$route.query.per_page;
-                store.searchText = '';
+                delete this.$route.query;
 
                 this.$router.push({ name: 'posts', params: { lang: this.$i18n.locale, render: moment().valueOf() } });
             }
