@@ -8,10 +8,7 @@
         data() {
             return {
                 posts: [],
-                pagination: null,
-                page: this.$route.query?.page || this.$C.DEFAULT_PAGE,
-                per_page: this.$route.query?.per_page || this.$C.DEFAULT_PER_PAGE,
-                q: this.$route?.query?.q
+                pagination: null
             }
         },
 
@@ -22,11 +19,7 @@
         },
 
         async mounted() {
-            this.postsAction({
-                page: this.page,
-                per_page: this.per_page,
-                q: this.q,
-            });
+            this.postsAction(this.$route.query);
         },
 
         methods: {
@@ -47,16 +40,20 @@
             showPagination() {
                 if (this.pagination &&
                     this.posts?.length &&
-                    (this.pagination.total_records > (this.per_page || this.defaultPerPage))) {
+                    (this.pagination.total_records > (this.$route.query?.per_page || this.$C.DEFAULT_PER_PAGE))) {
                     return true;
                 }
 
                 return false;
+            },
+
+            pageUpdate() {
+                this.postsAction(this.$route.query);
             }
         },
 
         watch: {
-            '$route.query': function () {
+            '$route.query.q': function () {
                 this.postsAction(this.$route.query);
             }
         }
@@ -88,7 +85,7 @@
             </template>
         </TransitionGroup>
 
-        <PaginationBlock v-if="showPagination()" :pagination="pagination" :q="this.q" />
+        <PaginationBlock v-if="showPagination()" :pagination="pagination" @click="pageUpdate" />
     </div>
 </template>
 

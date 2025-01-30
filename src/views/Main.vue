@@ -19,8 +19,6 @@
 
         mounted() {
             this.checkUser();
-            this.setLang();
-            this.updatePageTitle();
         },
 
         updated() {
@@ -39,6 +37,7 @@
                     }
                 }
             },
+            
             setLang() {
                 this.$i18n.locale = this.$route.params.lang;
             },
@@ -54,8 +53,12 @@
         },
 
         watch: {
-            '$route': function () {
-                this.updatePageTitle();
+            '$route': {
+                handler() {
+                    this.setLang();
+                    this.updatePageTitle();
+                },
+                immediate: true
             }
         }
     }

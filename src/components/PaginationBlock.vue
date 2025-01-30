@@ -16,9 +16,6 @@
             pagination: {
                 type: Object,
                 required: true
-            },
-            q: {
-                type: String
             }
         },
         mounted() {

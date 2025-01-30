@@ -10,22 +10,25 @@
                 base_url: import.meta.env.VITE_BASE_URL
             }
         },
+
         components: {
             ContentLoader,
             Back
         },
+
         props: {
             route: {
                 type: String
             }
         },
+
         async mounted() {
             let response = await PostAPI.getPost(this.$route.params.id);
 
             if (response) {
                 this.post = response.data;
 
-                document.title = this.post.title + ' | ' + this.$C.DEFAULT_PAGE_TITLE;
+                this.updateTitle();
             } else {
                 this.$router.push({
                     name: 'not-found',
@@ -33,6 +36,16 @@
                     query: this.$route.query,
                     hash: this.$route.hash,
                 });
+            }
+        },
+
+        updated() {
+            this.updateTitle();
+        },
+
+        methods: {
+            updateTitle() {
+                document.title = this.post.title + ' | ' + this.$C.DEFAULT_PAGE_TITLE;
             }
         }
     }
