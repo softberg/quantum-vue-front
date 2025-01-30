@@ -14,7 +14,7 @@
 </script>
 
 <template>
-	<div :class="['material-alert left-align', type]">
-		{{ message }}
-	</div>
+    <div :class="['material-alert left-align', type]">
+        {{ message }}
+    </div>
 </template>

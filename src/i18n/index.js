@@ -1,7 +1,7 @@
-import { createI18n } from 'vue-i18n';
-import en from './en.json';
-import ru from './ru.json';
-import am from './am.json';
+import { createI18n } from "vue-i18n";
+import en from "@/i18n/en.json";
+import ru from "@/i18n/ru.json";
+import am from "@/i18n/am.json";
 
 const i18n = createI18n({
     legacy: false,

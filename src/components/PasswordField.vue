@@ -32,6 +32,7 @@
 </script>
 
 <template>
-    <input name="password" :id="elemId" :type="type" @input="$emit('update:modelValue', $event.target.value)" v-bind="$attrs" autocomplete="off" />
+    <input name="password" :id="elemId" :type="type" @input="$emit('update:modelValue', $event.target.value)"
+        v-bind="$attrs" autocomplete="off" />
     <i :class="classes" @click="toggleShow">{{ icon }}</i>
 </template>
