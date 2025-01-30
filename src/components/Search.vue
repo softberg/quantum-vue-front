@@ -7,8 +7,6 @@
             }
         },
         mounted() {
-            delete this.$route.query;
-
             if (this.searchText) {
                 document.querySelector('.search-bar').focus();
             }
@@ -39,12 +37,7 @@
     <li>
         <a class="search-tab">
             <div>
-                <input 
-                    class="search-bar" 
-                    type="search" 
-                    placeholder="Search"
-                    autocomplete="off"
-                    v-model="searchText">
+                <input class="search-bar" type="search" placeholder="Search" autocomplete="off" v-model="searchText">
             </div>
             <i class="material-icons search-bar-img"></i>
         </a>
@@ -66,7 +59,7 @@
         margin: 0;
     }
 
-    .search-bar:focus{
+    .search-bar:focus {
         width: 300px !important;
         position: relative;
         font-size: 16px !important;

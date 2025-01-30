@@ -12,8 +12,9 @@
 </script>
 
 <template>
-	<div class="card post-card hoverable">
-        <router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale, route: 'posts' } }" className="post-item-link">
+    <div class="card post-card hoverable">
+        <router-link :to="{ name: 'post', params: { id: post.id, lang: this.$i18n.locale, route: 'posts' } }"
+            className="post-item-link">
             <div class="card-image card-image-box">
                 <img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="content_img">
                 <img v-else src="@/assets/images/no-image.png" class="content_no_img">

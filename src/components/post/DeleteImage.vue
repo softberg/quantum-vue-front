@@ -1,5 +1,5 @@
 <script>
-    import { PostAPI } from '@/helpers/post';
+    import { PostAPI } from "@/helpers/post";
 
     export default {
         props: {
@@ -10,7 +10,7 @@
         async mounted() {
             let elems = document.querySelectorAll('.modal');
             M.Modal.init(elems)
-            
+
         },
         methods: {
             async submit() {
@@ -22,7 +22,7 @@
                 } else {
                     this.inProgress = false;
                 }
-		    }   
+            }
         }
     }
 </script>
@@ -34,7 +34,9 @@
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">{{ $t('message.cancel') }}</a>
-            <a href="#!" @click="submit" class="modal-close waves-effect waves-green btn-flat btn red lighten-2 white-text">{{ $t('message.yes') }}</a>
+            <a href="#!" @click="submit"
+                class="modal-close waves-effect waves-green btn-flat btn red lighten-2 white-text">{{ $t('message.yes')
+                }}</a>
         </div>
     </div>
 </template>

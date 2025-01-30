@@ -1,7 +1,7 @@
 <script>
-    import { ContentLoader } from 'vue-content-loader';
-    import { PostAPI } from '@/helpers/post';
-    import Back from '../components/post/Back.vue';
+    import { ContentLoader } from "vue-content-loader";
+    import { PostAPI } from "@/helpers/post";
+    import Back from "@/components/post/Back.vue";
 
     export default {
         data() {
@@ -25,7 +25,7 @@
             if (response) {
                 this.post = response.data;
 
-                document.title = this.post.title + ' | ' + this.$router.options.defaultPageTitle;
+                document.title = this.post.title + ' | ' + this.$C.DEFAULT_PAGE_TITLE;
             } else {
                 this.$router.push({
                     name: 'not-found',
@@ -39,36 +39,36 @@
 </script>
 
 <template>
-	<div class="main-wrapper">
-		<div class="center-align container">
-			<div class="polaroid">
-				<div v-if="!post">
-					<ContentLoader viewBox="0 0 400 420" :speed="2" :animate="true">
-						<rect x="0" y="0" rx="0" ry="0" width="100%" height="40" />
-						<rect x="0" y="45" rx="0" ry="0" width="100%" height="150" />
-						<rect x="0" y="200" rx="0" ry="0" width="100%" height="120" />
-					</ContentLoader>
-				</div>
-				<div v-else>
+    <div class="main-wrapper">
+        <div class="center-align container">
+            <div class="polaroid">
+                <div v-if="!post">
+                    <ContentLoader viewBox="0 0 400 420" :speed="2" :animate="true">
+                        <rect x="0" y="0" rx="0" ry="0" width="100%" height="40" />
+                        <rect x="0" y="45" rx="0" ry="0" width="100%" height="150" />
+                        <rect x="0" y="200" rx="0" ry="0" width="100%" height="120" />
+                    </ContentLoader>
+                </div>
+                <div v-else>
                     <Back :route="$route.params.route || 'posts'" />
 
-					<h1 class="single-blog-title">
-						{{ post.title }}
-					</h1>
-					<div class="row">
-						<div class="col s12 center-align post-date teal-text text-accent-4">
-							{{ post.date }}
-						</div>
-						<div class="col s12 center-align post-author teal-text text-accent-4">
-							{{ post.author }}
-						</div>
-					</div>
-					<img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="single_page_img">
-					<p class="left-align single-blog-txt">
-						{{ post.content }}
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <h1 class="single-blog-title">
+                        {{ post.title }}
+                    </h1>
+                    <div class="row">
+                        <div class="col s12 center-align post-date teal-text text-accent-4">
+                            {{ post.date }}
+                        </div>
+                        <div class="col s12 center-align post-author teal-text text-accent-4">
+                            {{ post.author }}
+                        </div>
+                    </div>
+                    <img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="single_page_img">
+                    <p class="left-align single-blog-txt">
+                        {{ post.content }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

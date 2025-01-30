@@ -1,49 +1,49 @@
 import axiosInstance from "@/helpers/axiosInstance";
 
 export const PostAPI = {
-	async getPosts(params) {
-		try {
-			let response = await axiosInstance.get('/api/posts', { params });
+    async getPosts(params) {
+        try {
+            let response = await axiosInstance.get('/api/posts', { params });
 
-			return response.data;
+            return response.data;
 
-		} catch (err) {
-			return err;
-		}
-	},
+        } catch (err) {
+            return err;
+        }
+    },
 
-	async getPost(id) {
-		try {
-			let response = await axiosInstance.get('/api/post/' + id);
+    async getPost(id) {
+        try {
+            let response = await axiosInstance.get('/api/post/' + id);
 
-			return response.data;
+            return response.data;
 
-		} catch (err) {
-			return err;
-		}
-	},
+        } catch (err) {
+            return err;
+        }
+    },
 
-	async getMyPosts(accessToken) {
-		try {
-			let response = await axiosInstance.get('/api/my-posts', {
-				headers: {
-					Authorization: 'Bearer ' + accessToken
-				}
-			});
+    async getMyPosts(accessToken) {
+        try {
+            let response = await axiosInstance.get('/api/my-posts', {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken
+                }
+            });
 
-			return response.data;
-		}
-		catch (err) {
-			return err;
-		}
-	},
+            return response.data;
+        }
+        catch (err) {
+            return err;
+        }
+    },
 
     async createPost(postData) {
         try {
             const response = await axiosInstance.post('api/my-posts/create', postData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${ localStorage.getItem('accessToken') }`,
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
 
@@ -55,10 +55,10 @@ export const PostAPI = {
 
     async amendPost(postData, id) {
         try {
-            const response = await axiosInstance.put(`api/my-posts/amend/${ id }`, postData, {
+            const response = await axiosInstance.put(`api/my-posts/amend/${id}`, postData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${ localStorage.getItem('accessToken') }`,
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
 
@@ -70,9 +70,9 @@ export const PostAPI = {
 
     async deleteImage(id) {
         try {
-            const response = await axiosInstance.delete(`/api/my-posts/delete-image/${ id }`, {
+            const response = await axiosInstance.delete(`/api/my-posts/delete-image/${id}`, {
                 headers: {
-                  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
 
@@ -84,9 +84,9 @@ export const PostAPI = {
 
     async deletePost(id) {
         try {
-            const response = await axiosInstance.delete(`/api/my-posts/delete/${ id }`, {
+            const response = await axiosInstance.delete(`/api/my-posts/delete/${id}`, {
                 headers: {
-                  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
 

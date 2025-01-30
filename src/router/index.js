@@ -1,17 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 import auth from "@/middlewares/auth";
 import guest from "@/middlewares/guest";
-import i18n from "@/i18n/index";
 
 const router = createRouter({
-    defaultPageTitle: 'Quantum PHP App',
-    setPageTitle: (title) => {
-        document.title = router.options.defaultPageTitle;
-
-        if (title) {
-            document.title = i18n.global.t(title) + ' | ' + router.options.defaultPageTitle;
-        }
-    },
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
@@ -131,22 +122,16 @@ const router = createRouter({
 	]
 });
 
-router.isReady().then(() => {
-    router.options.setPageTitle(router.currentRoute.value.meta.title);
-});
-
 router.beforeEach(async (to, from, next) => {
-    router.options.setPageTitle(to.meta.title);
+    if (to.meta.middleware) {
+        let state = await to.meta.middleware();
 
-	if (to.meta.middleware) {
-		let state = await to.meta.middleware();
+        if (!state) {
+            router.push({ name: 'home' });
+        }
+    }
 
-		if (!state) {
-			router.push({ name: 'home' });
-		}
-	}
-
-	next();
+    next();
 });
 
 export default router;
