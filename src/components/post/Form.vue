@@ -11,8 +11,11 @@
             return {
                 base_url: import.meta.env.VITE_BASE_URL,
                 store,
-                errorMessage: '',
-                moment
+                moment,
+                alert: {
+                    type: null,
+                    message: ''
+                },
             }
         },
         props: {
@@ -69,8 +72,8 @@
 
                 } else {
                     this.inProgress = false;
-                    this.errorMessage = response.message;
-
+                    this.alert.type = response.response.data.status
+                    this.alert.message = response.response.data.message;
                 }
             }
         }
@@ -82,10 +85,9 @@
         <Back :route="'my-post-list'" />
         <div class="row">
             <div class="col s12">
-                <h1 class="center-align teal-text">{{ post.id ? $t('message.update_post') : $t('message.new_post') }}
-                </h1>
+                <h1 class="center-align teal-text">{{ post.id ? $t('message.update_post') : $t('message.new_post') }}</h1>
 
-                <ErrorMessage v-if="errorMessage" :message="errorMessage" />
+                <ErrorMessage v-if="alert.message" :message="alert.message" :type="alert.type" />
 
                 <div class="card teal accent-4">
                     <div class="card-content">

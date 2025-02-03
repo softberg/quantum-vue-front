@@ -3,6 +3,7 @@
     import PostItem from "@/components/PostItem.vue";
     import { PostAPI } from "@/helpers/post";
     import PaginationBlock from "@/components/PaginationBlock.vue";
+    import { DEFAULT_PER_PAGE } from "@/constants";
 
     export default {
         data() {
@@ -40,7 +41,7 @@
             showPagination() {
                 if (this.pagination &&
                     this.posts?.length &&
-                    (this.pagination.total_records > (this.$route.query?.per_page || this.$C.DEFAULT_PER_PAGE))) {
+                    (this.pagination.total_records > (this.$route.query?.per_page || DEFAULT_PER_PAGE))) {
                     return true;
                 }
 
@@ -65,7 +66,7 @@
         <h1 class="center-align teal-text">{{ $t('message.posts') }}</h1>
         <TransitionGroup name="list" tag="div" className="row post_container">
             <template v-if="!posts.length">
-                <div class="col s12 m3 post-item" v-for="index in this.$C.DEFAULT_PER_PAGE" :key="index"
+                <div class="col s12 m3 post-item" v-for="index in DEFAULT_PER_PAGE" :key="index"
                     :class="{ hide: hidden }">
                     <content-loader viewBox="0 0 476 536" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
                         <rect x="0" y="0" rx="5" ry="5" width="100%" height="349" />

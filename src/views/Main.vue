@@ -4,6 +4,7 @@
     import { AuthAPI } from "@/helpers/auth";
     import { store } from "@/store";
     import i18n from "@/i18n/index";
+    import { DEFAULT_PAGE_TITLE } from "@/constants";
 
     export default {
         components: {
@@ -44,10 +45,10 @@
 
             updatePageTitle() {
                 if (this.$route.meta.title) {
-                    document.title = i18n.global.t(this.$route.meta.title) + ' | ' + this.$C.DEFAULT_PAGE_TITLE;
+                    document.title = i18n.global.t(this.$route.meta.title) + ' | ' + DEFAULT_PAGE_TITLE;
 
                 } else {
-                    document.title = this.$C.DEFAULT_PAGE_TITLE;
+                    document.title = DEFAULT_PAGE_TITLE;
                 }
             }
         },

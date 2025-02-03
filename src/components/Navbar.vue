@@ -4,6 +4,7 @@
     import { store } from "@/store";
     import Search from "@/components/Search.vue";
     import { Helper } from "@/helpers/helper";
+    import { QUANTUM_PHP_FRAMEWORK } from "@/constants";
 
     export default {
         components: {
@@ -48,7 +49,7 @@
         <div class="nav-wrapper row">
             <span class="navbar-logo" v-show="$route.name !== 'home'">
                 <router-link :to="Helper.link('home', this.$i18n.locale)">
-                    <img :alt="$C.QUANTUM_PHP_FRAMEWORK" class="logo" src="@/assets/images/quantum-logo-white.png" />
+                    <img :alt="QUANTUM_PHP_FRAMEWORK" class="logo" src="@/assets/images/quantum-logo-white.png" />
                 </router-link>
             </span>
 

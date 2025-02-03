@@ -2,6 +2,7 @@
     import { ContentLoader } from "vue-content-loader";
     import { PostAPI } from "@/helpers/post";
     import Back from "@/components/post/Back.vue";
+    import { DEFAULT_PAGE_TITLE } from "@/constants";
 
     export default {
         data() {
@@ -45,7 +46,7 @@
 
         methods: {
             updateTitle() {
-                document.title = this.post.title + ' | ' + this.$C.DEFAULT_PAGE_TITLE;
+                document.title = this.post.title + ' | ' + DEFAULT_PAGE_TITLE;
             }
         }
     }

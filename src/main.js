@@ -7,11 +7,8 @@ import { createApp } from "vue";
 import App from "@/views/App.vue";
 import router from "@/router";
 import i18n from "@/i18n/index";
-import * as Constants from "@/constants/index";
 
-const app = createApp(App);
-
-app.config.globalProperties.$C = Constants;
-app.use(router)
-app.use(i18n)
-app.mount('#app');
+createApp(App)
+    .use(router)
+    .use(i18n)
+    .mount('#app');

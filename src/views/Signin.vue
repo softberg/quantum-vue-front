@@ -1,8 +1,8 @@
 <script>
     import { AuthAPI } from "@/helpers/auth";
     import PasswordField from "@/components/PasswordField.vue";
-    import AlertMessage from "@/components/AlertMessage.vue";
     import { store } from "@/store";
+    import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 
     export default {
         data() {
@@ -27,7 +27,6 @@
 
                 let response = await AuthAPI.signin(this.form);
 
-
                 if (response.status == 'success') {
                     localStorage.setItem('accessToken', response.tokens.access_token);
                     localStorage.setItem('refreshToken', response.tokens.refresh_token);
@@ -37,8 +36,8 @@
 
                     this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
                 } else {
-                    this.alert.type = response.status;
-                    this.alert.message = response.message;
+                    this.alert.type = response.response.data.status;
+                    this.alert.message = response.response.data.message;
                     this.inProgress = false;
                 }
             }
@@ -46,7 +45,7 @@
 
         components: {
             PasswordField,
-            AlertMessage
+            ErrorMessage
         }
     }
 </script>
@@ -58,7 +57,7 @@
                 <div class=" col s12 l8 offset-l2 center-align white-text">
                     <h1>{{ $t('message.signin') }}</h1>
 
-                    <AlertMessage :message="alert.message" :type="alert.type" v-if="alert.message" />
+                    <ErrorMessage v-if="alert.message" :message="alert.message" :type="alert.type" />
 
                     <div class="card teal accent-4">
                         <div class="card-content">

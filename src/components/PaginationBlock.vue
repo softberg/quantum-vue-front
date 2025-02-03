@@ -1,14 +1,15 @@
 <script>
     import { store } from "@/store";
     import { Helper } from "@/helpers/helper";
+    import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/constants";
 
     export default {
         data() {
             return {
                 pageCount: 0,
                 store,
-                page: this.$route.query?.page || this.$C.DEFAULT_PAGE,
-                per_page: this.$route.query?.per_page || this.$C.DEFAULT_PER_PAGE,
+                page: this.$route.query?.page || DEFAULT_PAGE,
+                per_page: this.$route.query?.per_page || DEFAULT_PER_PAGE,
                 Helper
             }
         },
