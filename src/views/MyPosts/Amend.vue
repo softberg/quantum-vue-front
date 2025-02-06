@@ -1,6 +1,6 @@
 <script>
-    import Form from '@/components/post/Form.vue'
-    import { PostAPI } from '@/helpers/post';
+    import Form from "@/components/post/Form.vue";
+    import { PostAPI } from "@/helpers/post";
 
     export default {
         data() {

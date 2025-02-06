@@ -1,9 +1,9 @@
-import { reactive } from 'vue';
+import { reactive } from "vue";
 
 export const store = reactive({
-	user: null,
+    user: null,
 
-	setUser(user) {
-		this.user = user;
-	}
+    setUser(user) {
+        this.user = user;
+    }
 });
