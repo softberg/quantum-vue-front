@@ -5,6 +5,7 @@
     import DeleteImage from "@/components/post/DeleteImage.vue";
     import ErrorMessage from "@/components/messages/ErrorMessage.vue";
     import moment from "moment";
+    import { link, getLang } from "@/helpers/helper";
 
     export default {
         data() {
@@ -45,6 +46,8 @@
             this.initPlugins();
         },
         methods: {
+            link,
+            getLang,
             initPlugins() {
                 let textarea = document.getElementById('content');
 
@@ -68,7 +71,7 @@
                 }
 
                 if (response.status == 'success') {
-                    this.$router.push({ name: 'my-post-list', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'my-post-list', params: { lang: getLang() } });
 
                 } else {
                     this.inProgress = false;
@@ -128,8 +131,7 @@
                                 <button class="btn btn-large waves-effect waves-light submit-btn" type="submit">
                                     {{ $t('message.save') }}
                                 </button>
-
-                                <router-link :to="{ name: 'my-post-list', params: { lang: this.$i18n.locale } }"
+                                <router-link :to="link('my-post-list', getLang())"
                                     class="btn btn-large waves-effect waves-teal btn-flat white-text cancel-btn">
                                     {{ $t('message.cancel') }}
                                 </router-link>

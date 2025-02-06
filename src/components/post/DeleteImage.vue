@@ -1,5 +1,6 @@
 <script>
     import { PostAPI } from "@/helpers/post";
+    import { getLang } from "@/helpers/helper";
 
     export default {
         props: {
@@ -13,11 +14,12 @@
 
         },
         methods: {
+            getLang,
             async submit() {
                 let response = await PostAPI.deleteImage(this.id);
 
                 if (response.status == 'success') {
-                    this.$router.push({ name: 'my-post-list', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'my-post-list', params: { lang: getLang() } });
 
                 } else {
                     this.inProgress = false;

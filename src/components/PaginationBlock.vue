@@ -1,6 +1,6 @@
 <script>
     import { store } from "@/store";
-    import { Helper } from "@/helpers/helper";
+    import { link, getLang, getRouteName } from "@/helpers/helper";
     import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "@/constants";
 
     export default {
@@ -9,8 +9,7 @@
                 pageCount: 0,
                 store,
                 page: this.$route.query?.page || DEFAULT_PAGE,
-                per_page: this.$route.query?.per_page || DEFAULT_PER_PAGE,
-                Helper
+                per_page: this.$route.query?.per_page || DEFAULT_PER_PAGE
             }
         },
         props: {
@@ -23,6 +22,9 @@
             this.pageCount = Math.ceil(this.pagination.total_records / this.per_page);
         },
         methods: {
+            link,
+            getLang,
+            getRouteName,
             params(page) {
                 return {
                     page,
@@ -39,20 +41,20 @@
         <ul class="pagination">
             <li v-if="pagination?.current_page > pagination?.prev_page">
                 <router-link
-                    :to="Helper.link(this.$route.name, this.$i18n.locale, this.params(this.pagination.prev_page))"
+                    :to="link(getRouteName(), getLang(), this.params(this.pagination.prev_page))"
                     v-html="$t('message.pagination.prev')">
                 </router-link>
             </li>
 
             <li v-for="(item, index) in pageCount" :class="{ active: (index + 1) == pagination?.current_page }">
-                <router-link :to="Helper.link(this.$route.name, this.$i18n.locale, this.params(index + 1))">
+                <router-link :to="link(getRouteName(), getLang(), this.params(index + 1))">
                     {{ index + 1 }}
                 </router-link>
             </li>
 
             <li v-if="pagination?.current_page < pagination?.next_page">
                 <router-link
-                    :to="Helper.link(this.$route.name, this.$i18n.locale, this.params(this.pagination.next_page))"
+                    :to="link(getRouteName(), getLang(), this.params(this.pagination.next_page))"
                     v-html="$t('message.pagination.next')">
                 </router-link>
             </li>

@@ -3,7 +3,7 @@
     import { AuthAPI } from "@/helpers/auth";
     import { store } from "@/store";
     import Search from "@/components/Search.vue";
-    import { Helper } from "@/helpers/helper";
+    import { link, getLang, getQuery } from "@/helpers/helper";
     import { QUANTUM_PHP_FRAMEWORK } from "@/constants";
 
     export default {
@@ -15,7 +15,7 @@
         data() {
             return {
                 store,
-                Helper
+                QUANTUM_PHP_FRAMEWORK
             }
         },
 
@@ -28,6 +28,9 @@
         },
 
         methods: {
+            link,
+            getLang,
+            getQuery,
             async signout() {
                 let response = await AuthAPI.signout(localStorage.getItem('refreshToken'));
 
@@ -37,7 +40,7 @@
                     localStorage.removeItem('accessToken');
                     localStorage.removeItem('refreshToken');
 
-                    this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'home', params: { lang: getLang() } });
                 }
             }
         }
@@ -48,7 +51,7 @@
     <nav class="teal accent-4">
         <div class="nav-wrapper row">
             <span class="navbar-logo" v-show="$route.name !== 'home'">
-                <router-link :to="Helper.link('home', this.$i18n.locale)">
+                <router-link :to="link('home', getLang())">
                     <img :alt="QUANTUM_PHP_FRAMEWORK" class="logo" src="@/assets/images/quantum-logo-white.png" />
                 </router-link>
             </span>
@@ -57,7 +60,7 @@
                 <Search v-if="$route.name == 'posts'" />
 
                 <li>
-                    <router-link :to="Helper.link('posts', this.$i18n.locale, this.$route.query)" class="white-text">
+                    <router-link :to="link('posts', getLang(), getQuery())" class="white-text">
                         {{ $t('message.posts') }}
                     </router-link>
                 </li>
@@ -73,7 +76,7 @@
                         </a>
                         <ul id="dropdown1" class="dropdown-content">
                             <li>
-                                <router-link :to="Helper.link('my-post-list', this.$i18n.locale)">
+                                <router-link :to="link('my-post-list', getLang())">
                                     {{ $t('message.my_posts') }}
                                 </router-link>
                             </li>
@@ -88,11 +91,11 @@
 
                 <template v-else>
                     <li v-if="$route.name != 'signup'">
-                        <router-link :to="Helper.link('signup', this.$i18n.locale)" class="white-text">{{
+                        <router-link :to="link('signup', getLang())" class="white-text">{{
                             $t('message.signup') }}</router-link>
                     </li>
                     <li v-if="$route.name != 'signin'">
-                        <router-link :to="Helper.link('signin', this.$i18n.locale)" class="white-text">{{
+                        <router-link :to="link('signin', getLang())" class="white-text">{{
                             $t('message.signin') }}</router-link>
                     </li>
                 </template>

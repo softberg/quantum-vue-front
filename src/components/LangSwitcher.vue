@@ -1,5 +1,6 @@
 <script>
     import { store } from "@/store";
+    import { setLang, link, getQuery, getRouteName } from "@/helpers/helper";
 
     export default {
         data() {
@@ -12,6 +13,12 @@
                 ],
                 current_lang: 'en',
             }
+        },
+        methods: {
+            setLang,
+            link,
+            getQuery,
+            getRouteName
         }
     }
 </script>
@@ -23,8 +30,8 @@
     </a>
     <ul id="dropdown2" class="dropdown-content">
         <li v-for="lang in langs" :lang="lang.key" :id="lang.id">
-            <router-link :to="{ name: this.$route.name, params: { lang: lang.id }, query: this.$route.query }"
-                @click="this.$i18n.locale = lang.id">{{ lang.text }}</router-link>
+            <router-link :to="link(getRouteName(), lang.id, getQuery())"
+                @click="setLang(lang.id)">{{ lang.text }}</router-link>
         </li>
     </ul>
 </template>

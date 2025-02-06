@@ -1,10 +1,10 @@
 import axiosInstance from "@/helpers/axiosInstance";
-import i18n from "../i18n";
+import { getLang } from "@/helpers/helper";
 
 export const AuthAPI = {
     async getUser(accessToken) {
         try {
-            let response = await axiosInstance.get(`/api/${ i18n.global.locale.value }/me`, {
+            let response = await axiosInstance.get(`/api/${ getLang() }/me`, {
                 headers: {
                     Authorization: 'Bearer ' + accessToken
                 }
@@ -19,7 +19,7 @@ export const AuthAPI = {
 
     async signin(form) {
         try {
-            let response = await axiosInstance.post(`/api/${ i18n.global.locale.value }/signin`, form);
+            let response = await axiosInstance.post(`/api/${ getLang() }/signin`, form);
 
             if (response.data.status !== 'success') {
                 const error = new Error(response.data.message);
@@ -36,7 +36,7 @@ export const AuthAPI = {
 
     async signup(form) {
         try {
-            let response = await axiosInstance.post(`/api/${ i18n.global.locale.value }/signup`, form);
+            let response = await axiosInstance.post(`/api/${ getLang() }/signup`, form);
 
             if (response.data.status !== 'success') {
                 let message = null;
@@ -60,7 +60,7 @@ export const AuthAPI = {
 
     async signout(refreshToken) {
         try {
-            let response = await axiosInstance.get(`/api/${ i18n.global.locale.value }/signout`, {
+            let response = await axiosInstance.get(`/api/${ getLang() }/signout`, {
                 headers: {
                     'refresh_token': refreshToken
                 }
@@ -74,7 +74,7 @@ export const AuthAPI = {
 
     async forget(form) {
         try {
-            let response = await axiosInstance.post(`/api/${ i18n.global.locale.value }/forget`, form);
+            let response = await axiosInstance.post(`/api/${ getLang() }/forget`, form);
 
             return response.data;
 

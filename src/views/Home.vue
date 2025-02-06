@@ -1,6 +1,7 @@
 <script>
     import Bubbles from "@/components/Bubbles.vue";
     import { QUANTUM_PHP_FRAMEWORK, LEARN_MORE_LINK } from "@/constants";
+    import { link, getLang } from "@/helpers/helper";
 
     export default {
         data() {
@@ -11,6 +12,10 @@
         },
         components: {
             Bubbles
+        },
+        methods: {
+            link,
+            getLang
         }
     }
 </script>
@@ -28,7 +33,7 @@
                 </div>
             </div>
             <div class="index-links">
-                <router-link :to="{ name: 'about', params: { lang: this.$i18n.locale } }" class="white-text">{{
+                <router-link :to="link('about', getLang())" class="white-text">{{
                     $t('message.about') }}</router-link>
                 <a :href="LEARN_MORE_LINK" target="_blank" class="white-text">{{ $t('message.learn_more') }}</a>
             </div>

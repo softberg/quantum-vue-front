@@ -2,6 +2,7 @@
     import { AuthAPI } from "@/helpers/auth";
     import PasswordField from "@/components/PasswordField.vue";
     import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+    import { link, getLang } from "@/helpers/helper";
 
     export default {
         data() {
@@ -21,6 +22,8 @@
         },
 
         methods: {
+            link,
+            getLang,
             async submit() {
                 this.inProgress = true;
 
@@ -31,7 +34,7 @@
                         this.alert.type = null;
                         this.alert.message = '';
 
-                        this.$router.push({ name: 'signin', params: { lang: this.$i18n.locale } });
+                        this.$router.push({ name: 'signin', params: { lang: getLang() } });
                     }, 2000);
                 } else {
                     this.alert.type = response.response.data.status
@@ -86,7 +89,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col s12 right-align">
-                                        <router-link :to="{ name: 'signin', params: { lang: this.$i18n.locale } }"
+                                        <router-link :to="link('signin', getLang())"
                                             class="white-text">{{ $t('message.signin') }}
                                         </router-link>
                                     </div>

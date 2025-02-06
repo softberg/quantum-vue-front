@@ -2,6 +2,7 @@
     import DeletePost from "@/components/post/DeletePost.vue";
     import MyPostItem from "@/components/post/MyPostItem.vue";
     import { PostAPI } from "@/helpers/post";
+    import { link, getLang } from "@/helpers/helper";
 
     export default {
         components: {
@@ -24,6 +25,8 @@
             this.getMyPosts();
         },
         methods: {
+            link,
+            getLang,
             async getMyPosts() {
                 let accessToken = localStorage.getItem('accessToken');
 
@@ -54,7 +57,7 @@
                 $t('message.try_creating') }}</h4>
         </div>
         <div class="fixed-action-btn">
-            <router-link :to="{ name: 'create', params: { lang: this.$i18n.locale } }"
+            <router-link :to="link('create', getLang())"
                 class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 hoverable">
                 <i class="material-icons">add</i>
             </router-link>

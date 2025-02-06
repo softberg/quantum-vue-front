@@ -3,6 +3,7 @@
     import PasswordField from "@/components/PasswordField.vue";
     import { store } from "@/store";
     import ErrorMessage from "@/components/messages/ErrorMessage.vue";
+    import { link, getLang } from "@/helpers/helper";
 
     export default {
         data() {
@@ -22,6 +23,8 @@
         },
 
         methods: {
+            link,
+            getLang,
             async submit() {
                 this.inProgress = true;
 
@@ -34,7 +37,7 @@
                     this.alert.type = null;
                     this.alert.message = '';
 
-                    this.$router.push({ name: 'home', params: { lang: this.$i18n.locale } });
+                    this.$router.push({ name: 'home', params: { lang: getLang() } });
                 } else {
                     this.alert.type = response.response.data.status;
                     this.alert.message = response.response.data.message;
@@ -80,7 +83,7 @@
                                         <div class="row">
                                             <div class="col s12 left-align">
                                                 <router-link
-                                                    :to="{ name: 'signup', params: { lang: this.$i18n.locale } }"
+                                                    :to="link('signup', getLang())"
                                                     class="white-text">{{ $t('message.signup') }}
                                                 </router-link>
                                             </div>
@@ -88,7 +91,7 @@
                                         <div class="row">
                                             <div class="col s12 left-align">
                                                 <router-link
-                                                    :to="{ name: 'forget', params: { lang: this.$i18n.locale } }"
+                                                    :to="link('forget', getLang())"
                                                     class="white-text">{{ $t('message.forget_password') }}</router-link>
                                             </div>
                                         </div>

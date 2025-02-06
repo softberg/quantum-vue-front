@@ -5,6 +5,7 @@
     import { store } from "@/store";
     import i18n from "@/i18n/index";
     import { DEFAULT_PAGE_TITLE } from "@/constants";
+    import { setLang } from "@/helpers/helper";
 
     export default {
         components: {
@@ -27,6 +28,7 @@
         },
 
         methods: {
+            setLang,
             async checkUser() {
                 const accessToken = localStorage.getItem('accessToken');
 
@@ -37,10 +39,6 @@
                         this.store.setUser(user);
                     }
                 }
-            },
-            
-            setLang() {
-                this.$i18n.locale = this.$route.params.lang;
             },
 
             updatePageTitle() {
@@ -56,7 +54,7 @@
         watch: {
             '$route': {
                 handler() {
-                    this.setLang();
+                    this.setLang(this.$route.params.lang);
                     this.updatePageTitle();
                 },
                 immediate: true

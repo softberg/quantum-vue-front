@@ -1,4 +1,6 @@
 <script>
+    import { getLang } from "@/helpers/helper";
+
     export default {
         data() {
             return {
@@ -20,7 +22,7 @@
                 this.$router.push({
                     name: 'posts',
                     params: {
-                        lang: this.$i18n.locale
+                        lang: getLang()
                     },
                     query: {
                         page: this.page,
@@ -29,6 +31,9 @@
                     }
                 });
             }, 1000)
+        },
+        methods: {
+            getLang
         }
     }
 </script>
