@@ -28,10 +28,8 @@
             link,
             getLang,
             async getMyPosts() {
-                let accessToken = localStorage.getItem('accessToken');
-
-                if (accessToken) {
-                    let response = await PostAPI.getMyPosts(accessToken);
+                if (localStorage.getItem('accessToken')) {
+                    let response = await PostAPI.getMyPosts();
 
                     if (response?.data) {
                         this.myPosts = response?.data;
@@ -39,7 +37,7 @@
                 }
             },
             update(id) {
-                this.myPosts = this.myPosts.filter(myPost => { return myPost.id != id });
+                this.myPosts = this.myPosts.filter(myPost => { return myPost.uuid != id });
             }
         }
     }
@@ -49,7 +47,7 @@
     <div class="main-wrapper posts-container">
         <h1 class="center-align teal-text">{{ $t('message.my_posts') }}</h1>
         <div class="row container">
-            <ul class="collection" v-if="myPosts.length">
+            <ul class="collection" v-if="myPosts?.length">
                 <MyPostItem v-for="post in myPosts" :key="post.id" :post="post"
                     @update:modelValue="(postId) => id = postId" />
             </ul>

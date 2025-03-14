@@ -24,13 +24,9 @@ export const PostAPI = {
         }
     },
 
-    async getMyPosts(accessToken) {
+    async getMyPosts() {
         try {
-            let response = await axiosInstance.get(`/api/${ getLang() }/my-posts`, {
-                headers: {
-                    Authorization: 'Bearer ' + accessToken
-                }
-            });
+            let response = await axiosInstance.get(`/api/${ getLang() }/my-posts`);
 
             return response.data;
         }
@@ -41,12 +37,7 @@ export const PostAPI = {
 
     async createPost(postData) {
         try {
-            const response = await axiosInstance.post(`api/${ getLang() }/my-posts/create`, postData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-            });
+            const response = await axiosInstance.post(`api/${ getLang() }/my-posts/create`, postData);
 
             return response.data;
         } catch (err) {
@@ -56,12 +47,7 @@ export const PostAPI = {
 
     async amendPost(postData, id) {
         try {
-            const response = await axiosInstance.put(`api/${ getLang() }/my-posts/amend/${id}`, postData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-            });
+            const response = await axiosInstance.put(`api/${ getLang() }/my-posts/amend/${id}`, postData);
 
             return response.data;
         } catch (err) {
@@ -71,11 +57,7 @@ export const PostAPI = {
 
     async deleteImage(id) {
         try {
-            const response = await axiosInstance.delete(`/api/${ getLang() }/my-posts/delete-image/${ id }`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-            });
+            const response = await axiosInstance.delete(`/api/${ getLang() }/my-posts/delete-image/${ id }`);
 
             return response.data;
         } catch (err) {
@@ -85,11 +67,7 @@ export const PostAPI = {
 
     async deletePost(id) {
         try {
-            const response = await axiosInstance.delete(`/api/${ getLang() }/my-posts/delete/${ id }`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-            });
+            const response = await axiosInstance.delete(`/api/${ getLang() }/my-posts/delete/${ id }`);
 
             return response.data;
         } catch (err) {

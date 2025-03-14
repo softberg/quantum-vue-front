@@ -15,7 +15,7 @@ export function setLang(lang) {
 }
 
 export function getLang() {
-    return i18n.global.locale.value;
+    return i18n.global.locale.value || 'en';
 }
 
 export function getQuery() {

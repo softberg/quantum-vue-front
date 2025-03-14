@@ -31,9 +31,10 @@
             setLang,
             async checkUser() {
                 const accessToken = localStorage.getItem('accessToken');
+                const refreshToken = localStorage.getItem('refreshToken');
 
                 if (accessToken && !this.store.user) {
-                    let user = await AuthAPI.getUser(accessToken);
+                    let user = await AuthAPI.getUser(accessToken, refreshToken);
 
                     if (user) {
                         this.store.setUser(user);

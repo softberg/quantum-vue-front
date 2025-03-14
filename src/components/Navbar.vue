@@ -32,7 +32,7 @@
             getLang,
             getQuery,
             async signout() {
-                let response = await AuthAPI.signout(localStorage.getItem('refreshToken'));
+                let response = await AuthAPI.signout(localStorage.getItem('accessToken'), localStorage.getItem('refreshToken'));
 
                 if (response) {
                     this.store.setUser(null);
@@ -75,6 +75,11 @@
                             </span>
                         </a>
                         <ul id="dropdown1" class="dropdown-content">
+                            <li>
+                                <router-link :to="link('account-settings', getLang())">
+                                    {{ $t('message.account_settings') }}
+                                </router-link>
+                            </li>
                             <li>
                                 <router-link :to="link('my-post-list', getLang())">
                                     {{ $t('message.my_posts') }}

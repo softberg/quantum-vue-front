@@ -2,11 +2,12 @@ import axiosInstance from "@/helpers/axiosInstance";
 import { getLang } from "@/helpers/helper";
 
 export const AuthAPI = {
-    async getUser(accessToken) {
+    async getUser(accessToken, refreshToken) {
         try {
             let response = await axiosInstance.get(`/api/${ getLang() }/me`, {
                 headers: {
-                    Authorization: 'Bearer ' + accessToken
+                    Authorization: `Bearer ${ accessToken }`,
+                    refresh_token: refreshToken
                 }
             });
 
@@ -58,11 +59,12 @@ export const AuthAPI = {
         }
     },
 
-    async signout(refreshToken) {
+    async signout(accessToken, refreshToken) {
         try {
             let response = await axiosInstance.get(`/api/${ getLang() }/signout`, {
                 headers: {
-                    'refresh_token': refreshToken
+                    Authorization: `Bearer ${ accessToken }`,
+                    refresh_token: refreshToken
                 }
             });
 

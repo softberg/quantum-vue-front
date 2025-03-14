@@ -18,7 +18,7 @@
 
 <template>
     <div class="card post-card hoverable">
-        <router-link :to="{ name: 'post', params: { id: post.id, lang: getLang(), route: 'posts' } }"
+        <router-link :to="{ name: 'post', params: { id: post.uuid, lang: getLang(), route: 'posts' } }"
             className="post-item-link">
             <div class="card-image card-image-box">
                 <img v-if="post.image" :src="this.base_url + '/uploads/' + post.image" class="content_img">
@@ -40,7 +40,7 @@
         </router-link>
         <div class="card-content white teal-text text-darken-4">
             <span class="card-title post-title" title="{{ title }}">
-                <router-link :to="{ name: 'post', params: { id: post.id, lang: getLang() } }" class="teal-text">
+                <router-link :to="{ name: 'post', params: { id: post.uuid, lang: getLang() } }" class="teal-text">
                     {{ post.title }}
                 </router-link>
             </span>

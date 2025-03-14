@@ -66,14 +66,14 @@
         <h1 class="center-align teal-text">{{ $t('message.posts') }}</h1>
         
         <TransitionGroup name="list" tag="div" className="row post_container">
-            <template v-if="posts.length">
-                <div v-for="post in posts" :key="post.id" className="col s12 m3 post-item">
+            <template v-if="posts?.length">
+                <div v-for="post in posts" :key="post.uuid" className="col s12 m3 post-item">
                     <PostItem :post="post" />
                 </div>
             </template>
 
             <template v-else>
-                <h4 v-if="!loading && !posts.length" class="center-align grey-text">
+                <h4 v-if="!loading && !posts?.length" class="center-align grey-text">
                     {{ $t('message.no_posts') }}... {{ $t('message.try_creating') }}
                 </h4>
 

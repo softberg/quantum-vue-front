@@ -46,7 +46,7 @@
 
         methods: {
             updateTitle() {
-                document.title = this.post.title + ' | ' + DEFAULT_PAGE_TITLE;
+                document.title = this.post?.title + ' | ' + DEFAULT_PAGE_TITLE;
             }
         }
     }
