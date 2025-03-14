@@ -111,7 +111,28 @@ const router = createRouter({
                             },
                         }
                     ]
-				}
+				},
+                {
+                    path: 'account-settings',
+                    name: 'account-settings',
+                    component: () => import('@/views/AccountSettings.vue'),
+                    meta: {
+                        middleware: auth,
+                        title: 'message.account_settings'
+                    }
+                },
+                {
+                    path: 'account-settings/update',
+                    name: 'update',
+                    component: () => import('@/views/account/update.vue'),
+                    meta: { middleware: auth }
+                },
+                {
+                    path: 'account-settings/update/password',
+                    name: 'password',
+                    component: () => import('@/views/account/password.vue'),
+                    meta: { middleware: auth }
+                }
 			],
 		},
 		{

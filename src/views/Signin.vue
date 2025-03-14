@@ -31,9 +31,6 @@
                 let response = await AuthAPI.signin(this.form);
 
                 if (response.status == 'success') {
-                    localStorage.setItem('accessToken', response.tokens.access_token);
-                    localStorage.setItem('refreshToken', response.tokens.refresh_token);
-
                     this.alert.type = null;
                     this.alert.message = '';
 

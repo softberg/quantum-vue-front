@@ -63,8 +63,8 @@
                 postData.append('image', this.image);
                 postData.append('updated_at', moment().format('DD/MM/YYYY HH:mm:ss'));
 
-                if (this.post.id) {
-                    response = await PostAPI.amendPost(postData, this.post.id);
+                if (this.post.uuid) {
+                    response = await PostAPI.amendPost(postData, this.post.uuid);
 
                 } else {
                     response = await PostAPI.createPost(postData);
@@ -88,7 +88,7 @@
         <Back :route="'my-post-list'" />
         <div class="row">
             <div class="col s12">
-                <h1 class="center-align teal-text">{{ post.id ? $t('message.update_post') : $t('message.new_post') }}</h1>
+                <h1 class="center-align teal-text">{{ post.uuid ? $t('message.update_post') : $t('message.new_post') }}</h1>
 
                 <ErrorMessage v-if="alert.message" :message="alert.message" :type="alert.type" />
 
@@ -98,14 +98,14 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input v-model="title" name="title" id="title" type="text" class="validate">
-                                    <label for="title">{{ $t('message.title') }}</label>
+                                    <label :class="{ active: title }" for="title">{{ $t('message.title') }}</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <textarea v-model="content" name="content" id="content" data-length="1000"
                                         class="materialize-textarea"></textarea>
-                                    <label for="content">{{ $t('message.content') }}</label>
+                                    <label :class="{ active: content }" for="content">{{ $t('message.content') }}</label>
                                 </div>
                             </div>
                             <div class="file-field input-field upload-btn">
@@ -127,7 +127,6 @@
                             </div>
 
                             <div class="center-align">
-                                <input type="hidden" name="csrf-token" value="<?php echo csrf_token() ?>" />
                                 <button class="btn btn-large waves-effect waves-light submit-btn" type="submit">
                                     {{ $t('message.save') }}
                                 </button>
@@ -143,7 +142,7 @@
         </div>
     </div>
 
-    <DeleteImage v-if="post" :id="post.id" />
+    <DeleteImage v-if="post" :id="post.uuid" />
 </template>
 
 <style scoped>
